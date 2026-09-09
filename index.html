@@ -31,9 +31,14 @@
     body {
       font-family: 'Inter', sans-serif;
       color: var(--charcoal);
-      background-color: var(--white);
+      background-color: #DAD8D2;
       line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    main {
+      width: 100%;
+      background: var(--white);
     }
 
     html {
@@ -72,7 +77,7 @@
     }
 
     .logo-nav {
-      height: 50px;
+      height: 40px;
     }
 
     .logo-nav img {
@@ -122,7 +127,76 @@
       transform: translateY(-2px);
     }
 
+    /* ===== HAMBURGER MENU (MOBILE) ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .nav-mobile {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+      border-bottom: 1px solid var(--beige);
+      z-index: 999;
+    }
+
+    .nav-mobile.active {
+      display: flex;
+    }
+
+    .nav-mobile li {
+      width: 100%;
+    }
+
+    .nav-mobile a {
+      display: block;
+      padding: 1rem 2rem;
+      color: var(--charcoal);
+      border-bottom: 1px solid var(--beige);
+      transition: background 0.2s ease;
+    }
+
+    .nav-mobile a:hover {
+      background: var(--beige);
+    }
+
     @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
       .nav-links {
         display: none;
       }
@@ -135,52 +209,118 @@
     /* ===== HERO / BANNER ===== */
     .hero {
       min-height: 100vh;
+      background-image: url('img/Foto 1 — Hero.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, var(--white) 0%, var(--beige) 100%);
-      padding: 4rem 2rem;
-      text-align: center;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    /* Overlay escuro */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 46, 53, 0.80);
+      z-index: 1;
     }
 
     .hero-content {
-      max-width: 900px;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: flex-start;
+      max-width: 1400px;
+      width: 100%;
+      padding: 0 6rem;
       margin: 0 auto;
     }
 
-    .hero-logo {
-      margin-bottom: 3rem;
-      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
-    }
-
-    .hero-logo img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
+    .hero-text {
+      text-align: left;
+      padding-top: 2rem;
     }
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3.5rem;
       line-height: 1.2;
-      margin-bottom: 1rem;
-      color: var(--charcoal);
-      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: -1px;
     }
 
     .hero p {
-      font-size: 1.2rem;
-      color: var(--charcoal);
-      margin-bottom: 3rem;
-      opacity: 0.8;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
       line-height: 1.8;
     }
 
     .hero-cta {
-      display: inline-flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      font-size: 1rem;
+      border: 2px solid var(--gold);
+    }
+
+    .hero-cta:hover {
+      background: #C9B037;
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .hero-logo {
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      min-height: 550px;
+      align-self: center;
+    }
+
+    /* Aura/destaque iluminado atrás do logo */
+    .hero-logo::before {
+      content: '';
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.1) 40%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(40px);
+    }
+
+    .hero-logo img {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-logo img:hover {
+      transform: scale(1.12);
     }
 
     .btn {
@@ -215,7 +355,33 @@
       color: var(--white);
     }
 
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding: 0 4rem;
+        gap: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-logo img {
+        max-width: 300px;
+      }
+    }
+
     @media (max-width: 768px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2rem;
+      }
+
       .hero h1 {
         font-size: 2.2rem;
       }
@@ -225,13 +391,17 @@
       }
 
       .hero-logo img {
-        max-width: 250px;
+        max-width: 200px;
+      }
+
+      .hero-text {
+        text-align: center;
       }
     }
 
     /* ===== SEÇÃO DE SERVIÇOS ===== */
     .services {
-      padding: 6rem 2rem;
+      padding: 6rem 4rem;
       background: var(--white);
     }
 
@@ -242,11 +412,12 @@
 
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 4rem;
+      font-size: 1.8rem;
+      text-align: left;
+      margin-bottom: 3rem;
       color: var(--charcoal);
       position: relative;
+      padding-left: 0;
       padding-bottom: 1rem;
     }
 
@@ -254,62 +425,117 @@
       content: '';
       position: absolute;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
+      left: 0;
+      width: 80px;
       height: 3px;
       background: var(--gold);
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
     }
 
     .service-card {
       background: var(--beige);
       padding: 2.5rem;
-      border-radius: 8px;
-      text-align: center;
+      border-radius: 0;
+      text-align: left;
       transition: var(--transition);
-      border-top: 4px solid var(--gold);
+      border: none;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
     .service-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      display: none;
     }
 
     .service-card h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-weight: 600;
       color: var(--charcoal);
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .service-bar {
+      display: inline-block;
+      width: 4px;
+      height: 30px;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
     }
 
     .service-card p {
       font-size: 0.95rem;
       color: var(--charcoal);
       opacity: 0.8;
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
     /* ===== SEÇÃO SOBRE ===== */
     .about {
-      padding: 6rem 2rem;
+      padding: 6rem 4rem;
       background: var(--beige);
+      position: relative;
+    }
+
+    .about::before {
+      display: none;
     }
 
     .about-container {
-      max-width: 900px;
+      max-width: 1400px;
       margin: 0 auto;
-      text-align: center;
+      position: relative;
+      z-index: 2;
+      padding: 0;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      text-align: left;
+      width: 100%;
+      order: 1;
     }
 
     .about h2 {
@@ -317,6 +543,21 @@
       font-size: 2.5rem;
       margin-bottom: 2rem;
       color: var(--charcoal);
+      text-align: left;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .about h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      transform: none;
     }
 
     .about p {
@@ -325,159 +566,323 @@
       color: var(--charcoal);
       margin-bottom: 1.5rem;
       opacity: 0.9;
+      text-align: left;
+    }
+
+    .about-image {
+      width: 100%;
+      order: 2;
+      display: block !important;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px;
     }
 
     .about-highlight {
-      background: var(--white);
+      background: var(--beige);
       border-left: 4px solid var(--gold);
       padding: 2rem;
       margin-top: 2rem;
       border-radius: 4px;
+      text-align: left;
+      color: var(--charcoal);
+    }
+
+    .about-highlight p {
+      color: var(--charcoal);
+    }
+
+    .about-image {
+      display: block !important;
+    }
+
+    .about-image img {
+      display: block !important;
+    }
+
+    @media (max-width: 1024px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        order: 2;
+      }
+
+      .about-text {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-container {
+        padding: 2rem;
+      }
+
+      .about {
+        padding: 3rem 2rem;
+      }
     }
 
     /* ===== SEÇÃO PORTFOLIO (CASES) ===== */
     .portfolio {
-      padding: 6rem 2rem;
+      padding: 6rem 4rem;
       background: var(--white);
     }
 
     .portfolio-container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+    .carousel-wrapper {
+      position: relative;
       margin-top: 3rem;
-    }
-
-    .portfolio-item {
-      background: var(--beige);
-      padding: 2rem;
-      border-radius: 8px;
-      text-align: center;
-      min-height: 250px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      border: 2px dashed var(--gold);
+      flex: 1;
     }
 
-    .portfolio-item h3 {
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 2rem;
+      scroll-behavior: smooth;
+      flex: 1;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-item {
+      min-width: 280px;
+      flex-shrink: 0;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .carousel-label {
+      margin-top: 1rem;
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .portfolio-item p {
+      font-weight: 500;
       color: var(--charcoal);
-      opacity: 0.7;
     }
 
     /* ===== SEÇÃO CONTATO ===== */
     .contact {
-      padding: 6rem 2rem;
+      padding: 6rem 4rem;
       background: var(--charcoal);
       color: var(--white);
     }
 
     .contact-container {
-      max-width: 900px;
+      max-width: 500px;
       margin: 0 auto;
-      text-align: center;
     }
 
-    .contact h2 {
+    .contact-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-weight: 300;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--white);
     }
 
-    .contact p {
-      font-size: 1.1rem;
-      margin-bottom: 3rem;
+    .contact-subtitle {
+      font-size: 1rem;
+      color: var(--white);
       opacity: 0.9;
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
-    .contact-buttons {
+    .contact-form {
       display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .btn-contact {
-      background: var(--gold);
-      color: var(--charcoal);
-      padding: 1rem 2rem;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .btn-contact:hover {
-      background: #C9B037;
-      transform: translateY(-3px);
+      flex-direction: column;
+      gap: 1.2rem;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
     }
 
     .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .form-group input,
     .form-group textarea {
-      width: 100%;
-      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--gold);
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.1);
       color: var(--white);
-      font-family: inherit;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      outline: none;
+      resize: none;
       transition: var(--transition);
+      border-radius: 4px;
     }
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.5);
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      background: rgba(255, 255, 255, 0.15);
       border-color: #C9B037;
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .form-group textarea {
+      min-height: 130px;
       resize: vertical;
-      min-height: 120px;
+      max-height: 300px;
     }
 
     .btn-submit {
       background: var(--gold);
       color: var(--charcoal);
-      padding: 1rem 2.5rem;
-      font-weight: 600;
-      border-radius: 4px;
+      border: none;
       cursor: pointer;
-      transition: var(--transition);
-      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 28px;
+      border-radius: 100px;
+      margin-top: 0.25rem;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
 
     .btn-submit:hover {
-      background: #C9B037;
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ===== MODAL DE CONFIRMAÇÃO ===== */
+    .modal-confirm-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(44, 46, 53, 0.6);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-confirm-overlay.open {
+      display: flex;
+      animation: fadeIn 0.25s ease both;
+    }
+
+    .modal-confirm {
+      background: var(--white);
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      animation: slideUp 0.3s ease both;
+      border-radius: 8px;
+    }
+
+    .modal-confirm-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--beige);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 22px;
+    }
+
+    .modal-confirm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .modal-confirm-text {
+      font-size: 14px;
+      color: var(--charcoal);
+      opacity: 0.7;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .modal-confirm-btn {
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      padding: 12px 32px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      border-radius: 4px;
+    }
+
+    .modal-confirm-btn:hover {
+      opacity: 0.85;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ===== FOOTER ===== */
@@ -506,8 +911,43 @@
 
     .footer-cnpj {
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 400;
+      color: var(--white);
+      opacity: 0.8;
+    }
+
+    .footer-links {
+      font-size: 0.9rem;
+    }
+
+    .footer-links a {
       color: var(--gold);
+      text-decoration: none;
+      transition: var(--transition);
+      opacity: 0.9;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 4rem 2rem;
+      }
+
+      .services {
+        padding: 4rem 2rem;
+      }
+
+      .portfolio {
+        padding: 4rem 2rem;
+      }
+
+      .contact {
+        padding: 4rem 2rem;
+      }
     }
 
     @media (max-width: 768px) {
@@ -517,49 +957,16 @@
       }
     }
 
-    /* ===== SCROLL SMOOTH ===== */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #25D366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: var(--transition);
-      z-index: 999;
-      text-decoration: none;
-    }
 
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    }
-
-    @media (max-width: 480px) {
-      .whatsapp-btn {
-        width: 50px;
-        height: 50px;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        font-size: 1.2rem;
-      }
-    }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<main><!-- NAVBAR -->
 <nav id="nav">
   <div class="logo-nav">
-    <!-- Logo-02.svg (horizontal, sem subtítulo) -->
-    <img src="Logo-02.svg" alt="LaZenith Logo">
+    <!-- Logo-03.svg na navbar (com subtítulo) -->
+    <img src="img/Logo/Logo-03.svg" alt="LaZenith Logo">
   </div>
   <ul class="nav-links">
     <li><a href="#services">Serviços</a></li>
@@ -567,21 +974,33 @@
     <li><a href="#portfolio">Cases</a></li>
     <li><a href="#contact">Contato</a></li>
   </ul>
-  <a href="https://wa.me/5511978332614" class="cta-nav" target="_blank">Contatar via WhatsApp</a>
+
+  <!-- Menu Hambúrguer Mobile -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Menu Mobile -->
+  <ul class="nav-mobile" id="nav-mobile">
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#portfolio">Cases</a></li>
+    <li><a href="#contact">Contato</a></li>
+  </ul>
 </nav>
 
 <!-- HERO / BANNER -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-logo">
-      <!-- Logo-03.svg (com subtítulo e efeitos) -->
-      <img src="Logo-03.svg" alt="LaZenith - Marketing & Design">
+    <div class="hero-text">
+      <h1>Transforme ideias<br>em resultados.<br>Design, estratégia<br>e crescimento.</h1>
+      <p>Agência especializada em landing pages de alta conversão, design gráfico e gerenciamento de tráfego pago. Tudo para levar sua marca ao topo.</p>
+      <a href="#contact" class="hero-cta">Ver Como Funciona</a>
     </div>
-    <h1>Transforme ideias em resultados.<br>Design, estratégia e crescimento.</h1>
-    <p>Agência especializada em landing pages de alta conversão, design gráfico e gerenciamento de tráfego pago. Tudo para levar sua marca ao topo.</p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Ver Como Funciona</a>
-      <a href="https://wa.me/5511978332614" class="btn btn-secondary" target="_blank">WhatsApp</a>
+    <div class="hero-logo">
+      <img src="img/Logo/Logo-04_branco.svg" alt="LaZenith - Marketing & Design">
     </div>
   </div>
 </section>
@@ -592,23 +1011,19 @@
     <h2 class="section-title">Nossos Serviços</h2>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">📄</div>
-        <h3>Landing Pages</h3>
+        <h3><span class="service-bar"></span>Landing Pages</h3>
         <p>Conversão otimizada. Seu produto em foco. Páginas que vendem.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">🎨</div>
-        <h3>Design Gráfico</h3>
+        <h3><span class="service-bar"></span>Design Gráfico</h3>
         <p>Marca memorável. Visual que diferencia. Identidade profissional.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">✨</div>
-        <h3>UX/UI</h3>
+        <h3><span class="service-bar"></span>UX/UI</h3>
         <p>Experiência fluida. Interface intuitiva. Design que funciona.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">📈</div>
-        <h3>Tráfego Pago</h3>
+        <h3><span class="service-bar"></span>Tráfego Pago</h3>
         <p>Resultados mensuráveis. ROI comprovado. Crescimento acelerado.</p>
       </div>
     </div>
@@ -618,31 +1033,87 @@
 <!-- SOBRE -->
 <section class="about" id="about">
   <div class="about-container">
-    <h2>Por Que Contratar LaZenith?</h2>
-    <p>Especialista em tráfego pago e design de conversão com mais de 14 anos de experiência em design, branding e estratégia digital.</p>
-    <div class="about-highlight">
-      <p><strong>Atendimento focado.</strong> Você trabalha comigo, não com intermediários. Projetos ágeis, resultados comprovados e comprometimento total com o crescimento do seu negócio.</p>
+    <div class="about-content">
+      <div class="about-image">
+        <img src="img/Foto 2 — Sobre-Processo.png" alt="Processo de trabalho LaZenith">
+      </div>
+      <div class="about-text">
+        <h2>Por Que Contratar LaZenith?</h2>
+        <p>Especialista em tráfego pago e design de conversão com mais de 14 anos de experiência em design, branding e estratégia digital.</p>
+        <div class="about-highlight">
+          <p><strong>Atendimento focado.</strong> Você trabalha comigo, não com intermediários. Projetos ágeis, resultados comprovados e comprometimento total com o crescimento do seu negócio.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO / CASES -->
+<!-- PORTFOLIO / CASES - CARROSSEL -->
 <section class="portfolio" id="portfolio">
   <div class="portfolio-container">
-    <h2 class="section-title">Nossos Casos de Sucesso</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item">
-        <h3>📌 Case Em Breve</h3>
-        <p>Estamos preparando nossos melhores cases. Em breve, você verá resultados reais.</p>
+    <h2 class="section-title">Clientes</h2>
+    
+    <div class="carousel-wrapper">
+      <div class="carousel" id="clientsCarousel">
+        <div class="carousel-item">
+          <img src="img/Artesã.png" alt="Artesã">
+          <p class="carousel-label">Artesã</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Costureira.png" alt="Costureira">
+          <p class="carousel-label">Costureira</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Fisioterapeuta.png" alt="Fisioterapeuta">
+          <p class="carousel-label">Fisioterapeuta</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Fotógrafo.png" alt="Fotógrafo">
+          <p class="carousel-label">Fotógrafo</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Manicure.png" alt="Manicure">
+          <p class="carousel-label">Manicure</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Nutricionista.png" alt="Nutricionista">
+          <p class="carousel-label">Nutricionista</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Personal Trainer.png" alt="Personal Trainer">
+          <p class="carousel-label">Personal Trainer</p>
+        </div>
+        <!-- DUPLICADAS PARA LOOP INFINITO -->
+        <div class="carousel-item">
+          <img src="img/Artesã.png" alt="Artesã">
+          <p class="carousel-label">Artesã</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Costureira.png" alt="Costureira">
+          <p class="carousel-label">Costureira</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Fisioterapeuta.png" alt="Fisioterapeuta">
+          <p class="carousel-label">Fisioterapeuta</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Fotógrafo.png" alt="Fotógrafo">
+          <p class="carousel-label">Fotógrafo</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Manicure.png" alt="Manicure">
+          <p class="carousel-label">Manicure</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Nutricionista.png" alt="Nutricionista">
+          <p class="carousel-label">Nutricionista</p>
+        </div>
+        <div class="carousel-item">
+          <img src="img/Personal Trainer.png" alt="Personal Trainer">
+          <p class="carousel-label">Personal Trainer</p>
+        </div>
       </div>
-      <div class="portfolio-item">
-        <h3>📌 Case Em Breve</h3>
-        <p>Trabalhe conosco e seu case estará aqui!</p>
-      </div>
-      <div class="portfolio-item">
-        <h3>📌 Case Em Breve</h3>
-        <p>Deixe sua marca crescer conosco.</p>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -650,36 +1121,57 @@
 <!-- CONTATO -->
 <section class="contact" id="contact">
   <div class="contact-container">
-    <h2>Vamos Conversar?</h2>
-    <p>Tem uma ideia? Quer fazer crescer seu negócio? Entre em contato conosco!</p>
-    
-    <div class="contact-buttons">
-      <a href="https://wa.me/5511978332614" class="btn-contact" target="_blank">📱 WhatsApp: (11) 97833-2614</a>
-      <button class="btn-contact" onclick="document.getElementById('form-section').scrollIntoView()">📧 Enviar Formulário</button>
-    </div>
-
-    <form id="form-section" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <h2 class="contact-title">Entre em contato</h2>
+    <p class="contact-subtitle">Vamos conversar sobre seu projeto e encontrar a melhor solução para o seu negócio.</p>
+    <form id="contact-form" class="contact-form">
       <div class="form-group">
-        <label for="name">Seu Nome</label>
-        <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+        <label for="name">Seu nome</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          required 
+          placeholder="Como posso te chamar?"
+        >
       </div>
 
       <div class="form-group">
-        <label for="email">Seu Email</label>
-        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+        <label for="email">E-mail</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="seu@email.com"
+        >
       </div>
 
       <div class="form-group">
-        <label for="phone">Seu WhatsApp</label>
-        <input type="tel" id="phone" name="phone" placeholder="(11) 98765-4321">
+        <label for="phone">Telefone</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="(00) 0000-0000"
+          inputmode="numeric"
+          pattern="[0-9\s\(\)\-]+"
+          maxlength="15"
+        >
       </div>
 
       <div class="form-group">
-        <label for="message">Sua Mensagem</label>
-        <textarea id="message" name="message" required placeholder="Conte-nos sobre seu projeto..."></textarea>
+        <label for="message">Mensagem</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          required 
+          placeholder="Me conte sobre o que você precisa..."
+        ></textarea>
       </div>
 
-      <button type="submit" class="btn-submit">Enviar Mensagem</button>
+      <button type="submit" id="btn-send" class="btn-submit">
+        Enviar mensagem
+      </button>
     </form>
   </div>
 </section>
@@ -689,11 +1181,21 @@
   <div class="footer-content">
     <div class="footer-text">© 2026 LaZenith - Marketing & Design</div>
     <div class="footer-cnpj">CNPJ: 36.151.883/0001-88</div>
+    <div class="footer-links">
+      <a href="privacidade.html">Política de Privacidade</a>
+    </div>
   </div>
 </footer>
 
-<!-- WHATSAPP BUTTON -->
-<a href="https://wa.me/5511978332614" class="whatsapp-btn" target="_blank" title="Enviar WhatsApp">💬</a>
+<!-- MODAL CONFIRMAÇÃO -->
+<div class="modal-confirm-overlay" id="modal-confirm">
+  <div class="modal-confirm">
+    <div class="modal-confirm-icon">✓</div>
+    <div class="modal-confirm-title">Mensagem enviada!</div>
+    <p class="modal-confirm-text">Obrigada pelo contato.<br>Retorno em breve. 😊</p>
+    <button class="modal-confirm-btn" onclick="closeConfirm()">OK</button>
+  </div>
+</div>
 
 <script>
   // Navbar scroll effect
@@ -701,6 +1203,25 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
+
+  // HAMBURGER MENU
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+  
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMobile.classList.toggle('active');
+    });
+
+    // Fechar menu ao clicar em um link
+    navMobile.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMobile.classList.remove('active');
+      });
+    });
+  }
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -712,7 +1233,117 @@
       }
     });
   });
+
+  // MÁSCARA DE TELEFONE - (11) 1111-1111 ou (11) 11111-1111
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      // Remove tudo que não é número
+      let numbers = this.value.replace(/\D/g, '');
+      
+      // Máximo 11 dígitos (2 DDD + 9 números)
+      if (numbers.length > 11) {
+        numbers = numbers.slice(0, 11);
+      }
+      
+      let formatted = '';
+      
+      // Formata conforme vai digitando
+      if (numbers.length === 0) {
+        formatted = '';
+      } else if (numbers.length <= 2) {
+        // (XX
+        formatted = `(${numbers}`;
+      } else if (numbers.length <= 6) {
+        // (XX) XXXX
+        formatted = `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+      } else if (numbers.length <= 10) {
+        // (XX) XXXX-XXXX (8 dígitos após DDD)
+        formatted = `(${numbers.slice(0, 2)}) ${numbers.slice(2, 6)}-${numbers.slice(6)}`;
+      } else {
+        // (XX) XXXXX-XXXX (9 dígitos após DDD)
+        formatted = `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
+      }
+      
+      this.value = formatted;
+    });
+
+    // Bloqueia letras completamente
+    phoneInput.addEventListener('keypress', function(e) {
+      const char = String.fromCharCode(e.which);
+      if (/[a-zA-Z]/.test(char)) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  // FORMULÁRIO AJAX
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-send');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const data = new FormData(contactForm);
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/pestanascamilla@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: data
+        });
+        if (res.ok) {
+          contactForm.reset();
+          document.getElementById('modal-confirm').classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+      } catch(err) {
+        alert('Erro ao enviar. Tente novamente.');
+      }
+
+      btn.textContent = 'Enviar mensagem';
+      btn.disabled = false;
+    });
+  }
+
+  function closeConfirm() {
+    document.getElementById('modal-confirm').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ===== CARROSSEL AUTOMÁTICO INFINITO PERFEITO ===== */
+  const carousel = document.getElementById('clientsCarousel');
+  const items = carousel.querySelectorAll('.carousel-item');
+  const itemWidth = 280 + 32; // 280px width + 32px gap
+  const singleLoopWidth = itemWidth * 7; // Uma volta completa (7 imagens)
+  
+  let scrollPosition = 0;
+  let isResetting = false;
+  
+  function autoScroll() {
+    if (!isResetting) {
+      scrollPosition += 2; // Velocidade: 2px por frame (esquerda para direita)
+    }
+    
+    carousel.scrollLeft = scrollPosition;
+    
+    // Se chegou na metade (imagens duplicadas), volta pro começo suavemente
+    if (scrollPosition >= singleLoopWidth) {
+      isResetting = true;
+      scrollPosition = 0;
+      carousel.scrollLeft = 0;
+      isResetting = false;
+    }
+  }
+
+  // Scroll suave contínuo a cada 30ms
+  setInterval(autoScroll, 30);
+
+
 </script>
+</main>
 
 </body>
 </html>
