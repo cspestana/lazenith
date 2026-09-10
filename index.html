@@ -8,7 +8,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     /* ===== RESET ===== */
@@ -237,7 +240,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: flex-start;
+      align-items: center;
       max-width: 1400px;
       width: 100%;
       padding: 0 6rem;
@@ -246,17 +249,16 @@
 
     .hero-text {
       text-align: left;
-      padding-top: 2rem;
     }
 
     .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Poppins', sans-serif;
       font-size: 3.5rem;
       line-height: 1.2;
       margin-bottom: 1.5rem;
       color: var(--white);
-      font-weight: 600;
-      letter-spacing: -1px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     .hero p {
@@ -274,10 +276,11 @@
       padding: 1rem 2.5rem;
       border-radius: 100px;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       transition: var(--transition);
       font-size: 1rem;
       border: 2px solid var(--gold);
+      font-family: 'Poppins', sans-serif;
     }
 
     .hero-cta:hover {
@@ -293,8 +296,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 550px;
-      align-self: center;
+      margin-top: -100px;
     }
 
     /* Aura/destaque iluminado atrás do logo */
@@ -335,11 +337,12 @@
 
     .btn-primary {
       background: var(--gold);
-      color: var(--white);
+      color: var(--charcoal);
     }
 
     .btn-primary:hover {
       background: #C9B037;
+      color: var(--white);
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
@@ -411,14 +414,15 @@
     }
 
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
       text-align: left;
       margin-bottom: 3rem;
       color: var(--charcoal);
       position: relative;
       padding-left: 0;
       padding-bottom: 1rem;
+      font-weight: 700;
     }
 
     .section-title::after {
@@ -433,7 +437,7 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
 
@@ -461,49 +465,149 @@
     .service-card {
       background: var(--beige);
       padding: 2.5rem;
-      border-radius: 0;
-      text-align: left;
+      border-radius: 12px;
+      text-align: center;
       transition: var(--transition);
       border: none;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     }
 
     .service-icon {
-      display: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      font-size: 1.8rem;
     }
 
     .service-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 1rem;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      letter-spacing: 0.3px;
     }
 
     .service-bar {
-      display: inline-block;
-      width: 4px;
-      height: 30px;
-      background: var(--gold);
-      border-radius: 2px;
-      flex-shrink: 0;
+      display: none;
     }
 
     .service-card p {
       font-size: 0.95rem;
       color: var(--charcoal);
-      opacity: 0.8;
+      opacity: 0.75;
       line-height: 1.6;
+    }
+
+    /* ===== SEÇÃO COMO FUNCIONA ===== */
+    .how-it-works {
+      padding: 6rem 4rem;
+      background: var(--white);
+    }
+
+    .how-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+
+    @media (max-width: 1024px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .step {
+      background: var(--beige);
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .step-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .step h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.8rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+
+    .step-arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .step-arrow {
+        display: none;
+      }
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      border: 2px solid var(--gold);
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background: #C9B037;
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
     /* ===== SEÇÃO SOBRE ===== */
@@ -518,7 +622,7 @@
     }
 
     .about-container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
       position: relative;
       z-index: 2;
@@ -539,13 +643,14 @@
     }
 
     .about h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
       margin-bottom: 2rem;
       color: var(--charcoal);
       text-align: left;
       position: relative;
       padding-bottom: 1.5rem;
+      font-weight: 700;
     }
 
     .about h2::after {
@@ -567,6 +672,28 @@
       margin-bottom: 1.5rem;
       opacity: 0.9;
       text-align: left;
+    }
+
+    .about-bullets {
+      list-style: none;
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    .about-bullets li {
+      font-size: 1rem;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      line-height: 1.6;
+    }
+
+    .about-bullets li i {
+      color: var(--gold);
+      margin-top: 0.3rem;
+      flex-shrink: 0;
     }
 
     .about-image {
@@ -638,7 +765,7 @@
     }
 
     .portfolio-container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -670,6 +797,8 @@
       flex-shrink: 0;
       text-align: center;
       transition: transform 0.3s ease;
+      overflow: hidden;
+      border-radius: 12px;
     }
 
     .carousel-item img {
@@ -706,9 +835,9 @@
     }
 
     .contact-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
-      font-weight: 300;
+      font-weight: 700;
       text-align: center;
       margin-bottom: 1rem;
       color: var(--white);
@@ -780,20 +909,19 @@
       color: var(--charcoal);
       border: none;
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 15px 28px;
+      padding: 1rem 2.5rem;
       border-radius: 100px;
-      margin-top: 0.25rem;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: var(--transition);
     }
 
     .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+      background: #C9B037;
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
     .btn-submit:disabled {
@@ -885,6 +1013,41 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ===== WHATSAPP FLUTUANTE ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+      z-index: 999;
+    }
+
+    .whatsapp-float:hover {
+      background: #1ea85a;
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 480px) {
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+
     /* ===== FOOTER ===== */
     footer {
       background: var(--charcoal);
@@ -971,7 +1134,7 @@
   <ul class="nav-links">
     <li><a href="#services">Serviços</a></li>
     <li><a href="#about">Sobre</a></li>
-    <li><a href="#portfolio">Cases</a></li>
+    <li><a href="#portfolio">Clientes</a></li>
     <li><a href="#contact">Contato</a></li>
   </ul>
 
@@ -986,7 +1149,7 @@
   <ul class="nav-mobile" id="nav-mobile">
     <li><a href="#services">Serviços</a></li>
     <li><a href="#about">Sobre</a></li>
-    <li><a href="#portfolio">Cases</a></li>
+    <li><a href="#portfolio">Clientes</a></li>
     <li><a href="#contact">Contato</a></li>
   </ul>
 </nav>
@@ -1011,21 +1174,86 @@
     <h2 class="section-title">Nossos Serviços</h2>
     <div class="services-grid">
       <div class="service-card">
-        <h3><span class="service-bar"></span>Landing Pages</h3>
-        <p>Conversão otimizada. Seu produto em foco. Páginas que vendem.</p>
+        <div class="service-icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        <h3>Landing Pages</h3>
+        <p>Páginas otimizadas para conversão. Design estratégico + SEO básico + formulários eficientes.</p>
       </div>
       <div class="service-card">
-        <h3><span class="service-bar"></span>Design Gráfico</h3>
-        <p>Marca memorável. Visual que diferencia. Identidade profissional.</p>
+        <div class="service-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h3>Tráfego Pago</h3>
+        <p>Campanhas em Google e Meta otimizadas. ROI comprovado + relatórios semanais + acompanhamento contínuo.</p>
       </div>
       <div class="service-card">
-        <h3><span class="service-bar"></span>UX/UI</h3>
-        <p>Experiência fluida. Interface intuitiva. Design que funciona.</p>
+        <div class="service-icon">
+          <i class="fas fa-palette"></i>
+        </div>
+        <h3>Design Gráfico</h3>
+        <p>Posts, Stories, Banners e muito mais. Conteúdo visual consistente que atrai seu público.</p>
       </div>
       <div class="service-card">
-        <h3><span class="service-bar"></span>Tráfego Pago</h3>
-        <p>Resultados mensuráveis. ROI comprovado. Crescimento acelerado.</p>
+        <div class="service-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3>Automação de Atendimento</h3>
+        <p>Chatbot inteligente 24/7. Capture leads automaticamente no WhatsApp e Messenger.</p>
       </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Audit + Otimização</h3>
+        <p>Análise profunda de suas campanhas. Identifique problemas e implemente melhorias comprovadas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Consultoria Estratégica</h3>
+        <p>Diagnóstico do seu negócio. Plano de ação personalizado + sessões de orientação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how-it-works" id="how-it-works">
+  <div class="how-container">
+    <h2 class="section-title">Como Funciona Nosso Processo</h2>
+    
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Entendemos seu negócio, seu público e seus objetivos. Analisamos o mercado e definimos a estratégia perfeita.</p>
+      </div>
+      
+      <div class="step-arrow">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Implementação</h3>
+        <p>Criamos suas landing pages, configuramos campanhas e estruturamos automação. Tudo pronto para gerar resultados.</p>
+      </div>
+      
+      <div class="step-arrow">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Acompanhamento</h3>
+        <p>Monitoramos performance, otimizamos constantemente e prestamos suporte contínuo. Seu crescimento é nossa prioridade.</p>
+      </div>
+    </div>
+    
+    <div class="cta-section">
+      <a href="https://wa.me/5511978332614?text=Oi%20Camilla!%20Gostei%20do%20trabalho%20de%20vocês.%20Queria%20saber%20mais%20sobre%20seus%20serviços%20e%20como%20vocês%20podem%20ajudar%20meu%20negócio." class="cta-button" target="_blank">Solicitar Orçamento</a>
     </div>
   </div>
 </section>
@@ -1039,10 +1267,13 @@
       </div>
       <div class="about-text">
         <h2>Por Que Contratar LaZenith?</h2>
-        <p>Especialista em tráfego pago e design de conversão com mais de 14 anos de experiência em design, branding e estratégia digital.</p>
-        <div class="about-highlight">
-          <p><strong>Atendimento focado.</strong> Você trabalha comigo, não com intermediários. Projetos ágeis, resultados comprovados e comprometimento total com o crescimento do seu negócio.</p>
-        </div>
+        <p>Somos especializados em ajudar <strong>pequenos negócios e profissionais autônomos</strong> a crescer no digital.</p>
+        
+        <ul class="about-bullets">
+          <li><i class="fas fa-check"></i> Atendimento focado e personalizado</li>
+          <li><i class="fas fa-check"></i> Suporte contínuo e acompanhamento estratégico</li>
+          <li><i class="fas fa-check"></i> Investimento que gera retorno real no seu negócio</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1289,7 +1520,7 @@
       const data = new FormData(contactForm);
 
       try {
-        const res = await fetch('https://formsubmit.co/ajax/pestanascamilla@gmail.com', {
+        const res = await fetch('https://formspree.io/f/mwlkwyak', {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: data
@@ -1344,6 +1575,10 @@
 
 </script>
 </main>
+  <!-- WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/5511978332614?text=Oi%20Camilla!%20👋%20Gostei%20do%20trabalho%20de%20vocês.%20Queria%20saber%20mais%20sobre%20seus%20serviços." class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
 </body>
 </html>
