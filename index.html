@@ -2255,14 +2255,15 @@
       if (!portfolioSection || portfolioCards.length === 0) return;
 
       function updatePortfolio(idx) {
+        var TOTAL = portfolioCards.length;
         portfolioCards.forEach(function(card, i) {
           card.classList.remove('active', 'side-prev', 'side-next', 'far-prev');
-          var diff = i - idx;
-          if (diff === 0)       card.classList.add('active');
-          else if (diff === -1) card.classList.add('side-prev');
-          else if (diff === 1)  card.classList.add('side-next');
-          else if (diff < -1)   card.classList.add('far-prev');
-          // diff > 1: fica no estado padrão (esperando à direita, opacidade 0)
+          var dist = ((i - idx) % TOTAL + TOTAL) % TOTAL;
+          if (dist > TOTAL / 2) dist -= TOTAL;
+          if (dist === 0)       card.classList.add('active');
+          else if (dist === -1) card.classList.add('side-prev');
+          else if (dist === 1)  card.classList.add('side-next');
+          else                  card.classList.add('far-prev');
         });
 
         portfolioDots.forEach(function(dot, i) {
