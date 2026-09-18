@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LaZenith — Design, Marketing & Soluções Digitais</title>
-  <link rel="icon" href="img/logo-unicor.jpg" type="image/jpeg">
-  
+  <link rel="icon" href="img/favicon.png" type="image/jpeg">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <style>
     /* ===== RESET ===== */
     *, *::before, *::after {
@@ -24,21 +24,45 @@
 
     /* ===== CSS VARIABLES ===== */
     :root {
-      --charcoal: #2C2E35;
-      --gold: #D4AF37;
-      --gold-dark: #C9B037;
-      --white: #FFFFFF;
-      --off-white: #F9F7F4;
-      --beige: #F5F1E8;
-      --gray-light: #E8E6E3;
+      --charcoal: #1F1F2E;
+      --gold: #F5C542;
+      --gold-dark: #E6B620;
+      --white: #F1F0EA;
+      --off-white: #F1F0EA;
+      --beige: #8E8E98;
+      --gray-light: #1A1A20;
       --transition: all 0.3s ease;
     }
 
     /* ===== GLOBAL STYLES ===== */
+    html {
+      scroll-behavior: smooth;
+      background: #0D0D12;
+    }
+
+    html::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        /* canto superior direito — glow dourado vazando */
+        radial-gradient(ellipse 55% 50% at 100% 0%, rgba(200, 158, 40, 0.18) 0%, rgba(180, 138, 30, 0.06) 45%, transparent 70%),
+        /* canto inferior esquerdo — espelho suave */
+        radial-gradient(ellipse 55% 50% at 0% 100%, rgba(200, 158, 40, 0.14) 0%, rgba(180, 138, 30, 0.05) 45%, transparent 70%),
+        /* canto superior esquerdo — toque muito sutil */
+        radial-gradient(ellipse 40% 40% at 0% 0%, rgba(180, 138, 30, 0.08) 0%, transparent 60%),
+        /* canto inferior direito — toque muito sutil */
+        radial-gradient(ellipse 40% 40% at 100% 100%, rgba(180, 138, 30, 0.07) 0%, transparent 60%),
+        /* fundo base quase preto */
+        #0D0D12;
+      pointer-events: none;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       color: var(--charcoal);
-      background-color: var(--off-white);
+      background: transparent;
       line-height: 1.6;
       overflow-x: hidden;
       user-select: none;
@@ -49,11 +73,7 @@
 
     main {
       width: 100%;
-      background: var(--off-white);
-    }
-
-    html {
-      scroll-behavior: smooth;
+      background: transparent;
     }
 
     a {
@@ -73,18 +93,19 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: var(--white);
+      background: rgba(31, 31, 46, 0.92);
       padding: 1rem 2rem;
-      border-bottom: 1px solid var(--gray-light);
+      border-bottom: 1px solid rgba(245, 197, 66, 0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
     }
 
     nav.scrolled {
       padding: 0.8rem 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     .logo-nav {
@@ -105,7 +126,7 @@
     .nav-links a {
       font-size: 0.95rem;
       font-weight: 500;
-      color: var(--charcoal);
+      color: var(--white);
       position: relative;
     }
 
@@ -139,7 +160,7 @@
       background: var(--gold-dark);
       color: var(--white);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 8px 20px rgba(245, 197, 66, 0.25);
     }
 
     /* ===== HAMBURGER MENU (MOBILE) ===== */
@@ -156,7 +177,7 @@
     .hamburger span {
       width: 25px;
       height: 3px;
-      background: var(--charcoal);
+      background: var(--white);
       border-radius: 2px;
       transition: all 0.3s ease;
     }
@@ -177,14 +198,15 @@
       display: none;
       position: absolute;
       top: 80px;
-      left: 0;
-      right: 0;
-      background: var(--white);
+      right: 1rem;
+      width: 220px;
+      background: #1F1F2E;
       flex-direction: column;
       gap: 0;
       list-style: none;
-      border-bottom: 1px solid var(--gray-light);
+      border-radius: 12px;
       z-index: 999;
+      overflow: hidden;
     }
 
     .nav-mobile.active {
@@ -197,14 +219,14 @@
 
     .nav-mobile a {
       display: block;
-      padding: 1rem 2rem;
-      color: var(--charcoal);
-      border-bottom: 1px solid var(--gray-light);
+      padding: 1rem 1.5rem;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       transition: background 0.2s ease;
     }
 
     .nav-mobile a:hover {
-      background: var(--beige);
+      background: rgba(245, 197, 66, 0.15);
     }
 
     @media (max-width: 768px) {
@@ -233,15 +255,17 @@
       justify-content: center;
       padding: 0;
       margin: 0;
+      margin-top: -80px;
       width: 100vw;
       margin-left: calc(-50vw + 50%);
+      padding-top: 80px;
     }
 
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(44, 46, 53, 0.75);
+      background: rgba(31, 31, 46, 0.75);
       z-index: 1;
     }
 
@@ -318,7 +342,7 @@
       background: var(--gold-dark);
       color: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 8px 20px rgba(245, 197, 66, 0.3);
     }
 
     .btn-secondary {
@@ -356,7 +380,7 @@
       position: absolute;
       width: 350px;
       height: 350px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(245, 197, 66, 0.2) 0%, transparent 70%);
       border-radius: 50%;
       z-index: -1;
     }
@@ -364,13 +388,13 @@
     .hero-logo svg {
       width: 280px;
       height: auto;
-      filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
+      filter: drop-shadow(0 0 20px rgba(245, 197, 66, 0.2));
       transition: var(--transition);
     }
 
     .hero-logo svg:hover {
       transform: scale(1.08);
-      filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.35));
+      filter: drop-shadow(0 0 30px rgba(245, 197, 66, 0.35));
     }
 
     @media (max-width: 1024px) {
@@ -440,7 +464,7 @@
     /* ===== SEÇÃO PARA QUEM ===== */
     .for-who {
       padding: 3.5rem 4rem;
-      background: var(--white);
+      background: rgba(31, 31, 46, 0.55);
     }
 
     .for-who-container {
@@ -463,12 +487,12 @@
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
-      color: var(--charcoal);
+      color: var(--white);
     }
 
     .section-header-small p {
       font-size: 0.95rem;
-      color: #666;
+      color: var(--beige);
       line-height: 1.6;
       margin-bottom: 0;
     }
@@ -478,18 +502,34 @@
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      color: var(--charcoal);
+      color: var(--white);
     }
 
     .section-header p {
       font-size: 1.1rem;
-      color: #666;
+      color: var(--beige);
       line-height: 1.8;
     }
 
     .carousel-who {
       overflow: hidden;
       width: 100%;
+      position: relative;
+      /* Fade nas bordas via mask — funciona com qualquer fundo */
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
     }
 
     .carousel-who-inner {
@@ -511,11 +551,11 @@
     .carousel-who-item {
       display: inline-block;
       padding: 0.6rem 1.5rem;
-      background: var(--white);
-      border: 1px solid var(--gray-light);
+      background: #2A2A3E;
+      border: 1px solid rgba(245, 197, 66, 0.2);
       border-radius: 100px;
       font-size: 0.9rem;
-      color: var(--charcoal);
+      color: var(--white);
       font-weight: 500;
       flex-shrink: 0;
       transition: var(--transition);
@@ -556,261 +596,510 @@
 
     /* ===== SERVIÇOS ===== */
     .services {
-      padding: 6rem 4rem;
-      background: var(--gold);
+      background: #1E1E2A;
+      height: 500vh;
+      position: relative;
     }
 
-    .services-container {
-      max-width: 1200px;
+    /* Grainy texture pseudo-element for services-wrapper, how-it-works, contact */
+    .services-wrapper::after,
+    .how-it-works::after,
+    .contact::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      pointer-events: none;
+    }
+
+    .how-it-works,
+    .contact {
+      position: relative;
+    }
+
+    .services-wrapper {
+      position: sticky;
+      top: 82px;
+      height: calc(100vh - 82px);
+      overflow: hidden;
+      background: #1E1E2A;
+    }
+
+    .services-layout {
+      height: calc(100vh - 82px);
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      justify-items: center;
+      padding: 4rem 4rem;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
-    .services .section-header h2 {
-      color: var(--charcoal);
+    .services-text {
+      width: 100%;
+      max-width: 400px;
+      padding-right: 2rem;
     }
 
-    .services .section-header p {
-      color: var(--charcoal);
+    .services-text h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
     }
 
-    .services .service-card {
-      background: var(--white);
+    .services-text > p {
+      font-size: 1.1rem;
+      color: var(--beige);
+      line-height: 1.8;
     }
 
-    .services .service-card h3 {
-      color: var(--charcoal);
+    /* ===== SERVICES NAV (lista lateral) ===== */
+    .services-nav {
+      list-style: none;
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-top: 1.5rem;
+    .services-nav-item {
+      font-size: 0.95rem;
+      color: rgba(241, 240, 234, 0.25);
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      cursor: default;
+      transition: all 0.4s ease;
+      position: relative;
+      border-left: 2px solid rgba(245, 197, 66, 0.1);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+    }
+
+    .services-nav-item.active {
+      color: var(--white);
+      border-left-color: var(--gold);
+      font-weight: 500;
+    }
+
+    .services-nav-item.past {
+      color: rgba(241, 240, 234, 0.1);
+      border-left-color: rgba(245, 197, 66, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .services-nav {
+        display: none;
+      }
+    }
+
+    .services-cards-container {
+      height: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 500px;
     }
 
     .service-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 2rem;
+      position: absolute;
+      width: 100%;
+      background: #2A2A3E;
+      border-radius: 16px;
+      padding: 2.5rem;
       text-align: center;
-      border: 1px solid var(--gray-light);
-      transition: var(--transition);
+      border: 1px solid rgba(245, 197, 66, 0.2);
+      transition: all 0.6s ease;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      min-height: 480px;
+      min-height: 320px;
+      opacity: 0;
+      transform: translateY(100px);
+      pointer-events: none;
+    }
+
+    .service-card.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .service-card.prev {
+      opacity: 0;
+      transform: translateY(-100px);
     }
 
     .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-      border-color: var(--gold);
+      border-color: rgba(245, 197, 66, 0.4);
+      box-shadow: 0 8px 24px rgba(245, 197, 66, 0.1);
     }
 
     .service-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, rgba(245, 197, 66, 0.15), rgba(245, 197, 66, 0.08));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 1.5rem;
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: var(--gold);
       transition: var(--transition);
     }
 
-    .service-card:hover .service-icon {
+    .service-card.active .service-icon {
       background: var(--gold);
-      color: var(--white);
+      color: #1F1F2E;
       transform: scale(1.1);
     }
 
     .service-number {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--gold);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.5px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .service-card h3 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #D4D3CA;
       margin-bottom: 1rem;
-      color: var(--charcoal);
     }
 
     .service-card p {
-      font-size: 0.95rem;
-      color: #666;
+      font-size: 1rem;
+      color: #D4D3CA;
+      margin-bottom: 1.5rem;
       line-height: 1.6;
       flex-grow: 1;
-      margin-bottom: 1.5rem;
     }
 
     .service-features {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: #f9f7f4;
+      border: 2px solid var(--gold);
       border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      background: transparent;
     }
 
     .service-features small {
-      font-size: 0.85rem;
-      color: #666;
-      line-height: 1.5;
+      font-size: 0.9rem;
+      color: #D4D3CA;
       display: block;
+      line-height: 1.6;
     }
 
     .service-price {
-      margin-top: auto;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--gray-light);
+      border-top: 2px solid rgba(245, 197, 66, 0.3);
       text-align: center;
     }
 
     .service-price strong {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: var(--gold);
       display: block;
       margin-bottom: 0.5rem;
     }
 
     .service-price small {
-      font-size: 0.8rem;
-      color: #999;
+      font-size: 0.85rem;
+      color: #D4D3CA;
       display: block;
       line-height: 1.5;
     }
 
-    @media (max-width: 1024px) {
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-      }
-    }
-
     @media (max-width: 768px) {
       .services {
-        padding: 4rem 2rem;
+        height: 600vh;
       }
 
-      .services-grid {
+      .services-layout {
         grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 2rem;
+        align-items: center;
       }
 
-      .section-header h2 {
-        font-size: 1.8rem;
+      .services-text {
+        padding-right: 0;
+        margin-bottom: 1rem;
+        max-width: 100%;
+      }
+
+      .services-text h2 {
+        font-size: 2rem;
+      }
+
+      .services-text > p {
+        font-size: 1rem;
+      }
+
+      .services-cards-container {
+        max-width: 100%;
+      }
+
+      .service-card {
+        width: 100%;
+        padding: 2rem;
+        min-height: 380px;
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
       }
     }
 
     /* ===== PORTFÓLIO ===== */
     .portfolio {
-      padding: 6rem 4rem;
-      background: var(--white);
+      background: transparent;
     }
 
-    .portfolio-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .portfolio-wrapper {
+      position: sticky;
+      top: 82px;
+      height: calc(100vh - 82px);
+      overflow-x: clip; /* corta lateral sem afetar sombra vertical */
+      overflow-y: hidden;
+      background: rgba(19, 19, 28, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2.5rem 2rem 1.5rem;
     }
 
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-      margin-top: 3rem;
+    /* TOPO: título + subtítulo centralizados */
+    .portfolio-text {
+      text-align: center;
+      max-width: 700px;
+      margin-bottom: 2.8rem;
+      flex-shrink: 0;
     }
 
+    .portfolio-text h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+      white-space: nowrap;
+    }
+
+    .portfolio-text > p {
+      font-size: 0.95rem;
+      color: var(--beige);
+      line-height: 1.7;
+    }
+
+    /* CARROSSEL - container sem clip para mostrar laterais */
+    .portfolio-cards-container {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible; /* laterais aparecem sem corte */
+    }
+
+    /* Cada card posicionado absolutamente, centrado horizontalmente */
     .portfolio-card {
-      background: var(--white);
-      border-radius: 12px;
+      position: absolute;
+      width: 320px;
+      background: #2A2A3E;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--gray-light);
-      transition: var(--transition);
+      border: 1px solid rgba(245, 197, 66, 0.08);
+      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      /* padrão: esperando à direita, invisível */
+      opacity: 0;
+      transform: translateX(760px) scale(0.8);
+      filter: blur(0px) brightness(0.3);
+      z-index: 0;
     }
 
-    .portfolio-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    /* card imediatamente anterior - esquerda, desfocado */
+    .portfolio-card.side-prev {
+      opacity: 1;
+      transform: translateX(-370px) scale(0.88);
+      filter: blur(2px) brightness(0.45);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* card ATIVO - centro, salta pra frente */
+    .portfolio-card.active {
+      opacity: 1;
+      transform: translateX(0) translateY(-6px) scale(1.04);
+      filter: blur(0px) brightness(1);
+      border-color: rgba(245, 197, 66, 0.35);
+      box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.7),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(245, 197, 66, 0.18),
+        0 0 60px rgba(245, 197, 66, 0.08);
+      pointer-events: auto;
+      z-index: 3;
+    }
+
+    /* próximo card - direita, desfocado */
+    .portfolio-card.side-next {
+      opacity: 1;
+      transform: translateX(370px) scale(0.88);
+      filter: blur(2px) brightness(0.45);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* cards 2+ posições atrás: somem à esquerda */
+    .portfolio-card.far-prev {
+      opacity: 0;
+      transform: translateX(-760px) scale(0.8);
+      filter: blur(0px) brightness(0.3);
+      z-index: 0;
+    }
+
+    /* DOTS + CONTADOR na base */
+    .portfolio-footer {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      padding-top: 2rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .portfolio-dots {
+      display: flex;
+      gap: 0.55rem;
+    }
+
+    .portfolio-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(245, 197, 66, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .portfolio-dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+      width: 20px;
+      border-radius: 4px;
+    }
+
+    .portfolio-dot.past {
+      background: rgba(245, 197, 66, 0.08);
+    }
+
+    .portfolio-counter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(241, 240, 234, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .portfolio-counter .current {
+      color: var(--gold);
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
 
     .portfolio-image {
       width: 100%;
-      height: 280px;
-      background: linear-gradient(135deg, var(--beige) 0%, var(--gray-light) 100%);
+      height: 200px;
+      background: linear-gradient(135deg, #2f2f42 0%, #1a1a27 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #999;
+      color: #8E8E98;
       font-size: 3rem;
       position: relative;
       overflow: hidden;
     }
 
     .portfolio-image::before {
-      content: 'Projeto em breve';
-      position: absolute;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
-      color: #999;
-      font-weight: 500;
+      content: none;
     }
 
     .portfolio-content {
-      padding: 2rem;
+      padding: 1.4rem 1.6rem 1.6rem;
     }
 
     .portfolio-tag {
       display: inline-block;
       background: var(--gold);
       color: var(--charcoal);
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.78rem;
+      font-weight: 700;
       margin-bottom: 0.8rem;
       font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .portfolio-card h3 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      color: var(--charcoal);
-      margin-bottom: 0.5rem;
+      color: var(--white);
+      margin-bottom: 0.4rem;
     }
 
     .portfolio-card p {
-      color: #666;
-      font-size: 0.95rem;
+      color: var(--beige);
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-      .portfolio {
-        padding: 4rem 2rem;
-      }
-
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+    @media (max-width: 900px) {
+      .portfolio-wrapper { padding: 2rem 1rem 1rem; }
+      .portfolio-text h2 { font-size: 1.5rem; }
+      .portfolio-card { width: 280px; }
+      .portfolio-card.side-prev { transform: translateX(-220px) scale(0.82); }
+      .portfolio-card.side-next { transform: translateX(220px) scale(0.82); }
     }
 
     /* ===== COMO FUNCIONA ===== */
     .how-it-works {
       padding: 6rem 4rem;
-      background: var(--gold);
+      background: #1E1E2A;
     }
 
     .how-it-works-container {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .timeline {
@@ -826,10 +1115,10 @@
     }
 
     .timeline-step {
-      background: var(--white);
+      background: linear-gradient(145deg, #2f2f45 0%, #232335 100%);
       padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid var(--gray-light);
+      border-radius: 16px;
+      border: 1px solid rgba(245, 197, 66, 0.35);
       text-align: center;
       width: 100%;
       max-width: 260px;
@@ -837,10 +1126,35 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+
+      /* efeito 3D */
+      transform: perspective(800px) rotateX(4deg) rotateY(-2deg) translateY(0);
+      transform-style: preserve-3d;
+      box-shadow:
+        /* sombra de profundidade (lateral direita + base) */
+        6px 12px 0px rgba(245, 197, 66, 0.08),
+        0 20px 48px rgba(0, 0, 0, 0.45),
+        /* brilho suave no topo */
+        inset 0 1px 0 rgba(245, 197, 66, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+
+    .timeline-step:hover {
+      transform: perspective(800px) rotateX(2deg) rotateY(0deg) translateY(-6px);
+      border-color: rgba(245, 197, 66, 0.65);
+      box-shadow:
+        4px 8px 0px rgba(245, 197, 66, 0.12),
+        0 32px 64px rgba(0, 0, 0, 0.55),
+        0 0 32px rgba(245, 197, 66, 0.08),
+        inset 0 1px 0 rgba(245, 197, 66, 0.2);
     }
 
     .how-it-works .section-header h2 {
-      color: var(--charcoal);
+      color: var(--white);
+    }
+
+    .how-it-works .section-header p {
+      color: var(--beige);
     }
 
     .timeline-number {
@@ -855,12 +1169,12 @@
       font-family: 'Poppins', sans-serif;
       font-size: 1.15rem;
       font-weight: 600;
-      color: var(--charcoal);
+      color: var(--white);
       margin-bottom: 0.8rem;
     }
 
     .timeline-step p {
-      color: #666;
+      color: #8E8E98;
       font-size: 0.95rem;
       line-height: 1.6;
     }
@@ -884,6 +1198,7 @@
       .timeline-step {
         margin-left: 2rem;
         border-left: 3px solid var(--gold);
+        transform: none;
         padding-left: 2rem;
       }
 
@@ -915,7 +1230,7 @@
     /* ===== POR QUE LAZENITH ===== */
     .why-us {
       padding: 6rem 4rem;
-      background: var(--white);
+      background: rgba(31, 31, 46, 0.5);
     }
 
     .why-us-container {
@@ -932,29 +1247,30 @@
     }
 
     .differential {
-      background: var(--gold);
+      background: #2A2A3E;
       padding: 2.5rem;
       border-radius: 12px;
-      border: 1px solid var(--gold);
+      border: 1px solid rgba(245, 197, 66, 0.3);
       text-align: left;
       transition: var(--transition);
     }
 
     .differential:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 24px rgba(245, 197, 66, 0.2);
+      border-color: rgba(245, 197, 66, 0.5);
     }
 
     .differential h3 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.3rem;
       font-weight: 600;
-      color: var(--charcoal);
+      color: var(--white);
       margin-bottom: 1rem;
     }
 
     .differential p {
-      color: #333333;
+      color: var(--beige);
       font-size: 1rem;
       line-height: 1.7;
     }
@@ -963,16 +1279,16 @@
       font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
-      color: #F9F7F4;
+      color: #F1F0EA;
       margin-bottom: 1rem;
     }
 
     .positioning-statement {
       text-align: center;
       padding: 2rem;
-      background: var(--off-white);
+      background: rgba(245, 197, 66, 0.1);
       border-radius: 8px;
-      border-left: 4px solid var(--charcoal);
+      border-left: 4px solid var(--gold);
       margin-top: 2rem;
     }
 
@@ -980,7 +1296,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 1.1rem;
       font-weight: 500;
-      color: #1a1c21;
+      color: var(--white);
       line-height: 1.7;
     }
 
@@ -1000,33 +1316,52 @@
 
     /* ===== CTA FINAL ===== */
     .final-cta {
-      padding: 2rem 4rem;
-      background: var(--charcoal);
+      padding: 5rem 4rem;
+      background: transparent;
       color: var(--white);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Glow dourado sutil atrás da frase de impacto */
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245, 197, 66, 0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .final-cta-container {
-      max-width: 500px;
+      max-width: 780px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .final-cta h2 {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    /* Linha de destaque dourada abaixo do h2 */
+    .final-cta h2 .highlight {
+      color: var(--gold);
     }
 
     .final-cta p {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      opacity: 0.95;
-      line-height: 1.7;
+      font-size: 1.15rem;
+      margin-bottom: 0;
+      opacity: 0.75;
+      line-height: 1.8;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .btn-final {
@@ -1048,17 +1383,16 @@
       background: var(--gold-dark);
       color: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 8px 20px rgba(245, 197, 66, 0.3);
     }
 
     @media (max-width: 768px) {
       .final-cta {
-        padding: 4rem 2rem;
+        padding: 3.5rem 2rem;
       }
 
       .final-cta h2 {
-        font-size: 1.8rem;
-        max-width: 100%;
+        font-size: 2rem;
       }
 
       .final-cta p {
@@ -1069,12 +1403,14 @@
     /* ===== CONTATO / FORMULÁRIO ===== */
     .contact {
       padding: 6rem 4rem;
-      background: #F5F1E8;
+      background: #1E1E2A;
     }
 
     .contact-container {
       max-width: 700px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .contact-title {
@@ -1083,12 +1419,12 @@
       font-weight: 700;
       text-align: center;
       margin-bottom: 1rem;
-      color: var(--charcoal);
+      color: var(--white);
     }
 
     .contact-subtitle {
       text-align: center;
-      color: #666;
+      color: #8E8E98;
       font-size: 1rem;
       margin-bottom: 2rem;
       line-height: 1.6;
@@ -1108,7 +1444,7 @@
     .form-group label {
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: var(--charcoal);
+      color: var(--white);
       font-size: 0.95rem;
       font-family: 'Poppins', sans-serif;
     }
@@ -1123,7 +1459,7 @@
       font-size: 1rem;
       transition: var(--transition);
       background: var(--white);
-      color: var(--charcoal);
+      color: #1A1A20;
       user-select: text;
       -webkit-user-select: text;
     }
@@ -1133,7 +1469,7 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.1);
     }
 
     .form-group textarea {
@@ -1143,7 +1479,7 @@
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: #999;
+      color: #8E8E98;
     }
 
     .btn-submit {
@@ -1164,7 +1500,7 @@
       background: var(--gold-dark);
       color: var(--white);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 8px 20px rgba(245, 197, 66, 0.3);
     }
 
     .btn-submit:disabled {
@@ -1249,7 +1585,7 @@
     }
 
     .modal-confirm {
-      background: var(--white);
+      background: #2A2A3E;
       border-radius: 12px;
       padding: 2rem;
       text-align: center;
@@ -1278,12 +1614,12 @@
       font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--charcoal);
+      color: var(--white);
       margin-bottom: 0.5rem;
     }
 
     .modal-confirm-text {
-      color: #666;
+      color: #8E8E98;
       margin-bottom: 2rem;
       line-height: 1.6;
     }
@@ -1339,9 +1675,9 @@
   <!-- NAVBAR -->
   <nav id="nav">
     <div class="logo-nav">
-      <img src="img/Logo/Logo-03.svg" alt="LaZenith">
+      <img src="img/Logo/logos/PNG/Logo - 2-09.png" alt="LaZenith">
     </div>
-    
+
     <ul class="nav-links">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#services">Serviços</a></li>
@@ -1422,93 +1758,95 @@
 
     <!-- SERVIÇOS -->
     <section class="services" id="services">
-      <div class="services-container">
-        <div class="section-header">
-          <h2>Nossos serviços</h2>
-          <p>Soluções pensadas para ajudar pequenos negócios a construir, comunicar e fazer crescer sua presença.</p>
+      <div class="services-wrapper">
+        <div class="services-layout">
+
+          <!-- COLUNA ESQUERDA - TEXTO + NAV -->
+          <div class="services-text">
+            <h2>Nossos serviços e soluções</h2>
+            <p>Pensadas para ajudar pequenos negócios a construir, comunicar e fazer crescer sua presença.</p>
+
+            <ul class="services-nav" id="services-nav">
+              <li class="services-nav-item active" data-nav="0">Landing Pages &amp; Sites</li>
+              <li class="services-nav-item" data-nav="1">Identidade Visual</li>
+              <li class="services-nav-item" data-nav="2">Design para Redes Sociais</li>
+              <li class="services-nav-item" data-nav="3">Google Ads &amp; Meta Ads</li>
+            </ul>
+          </div>
+
+          <!-- COLUNA DIREITA - CARDS EM SEQUÊNCIA -->
+          <div class="services-cards-container">
+            <div class="service-card active" data-card="1">
+              <div class="service-icon">
+                <i class="fas fa-desktop"></i>
+              </div>
+              <div class="service-number">01</div>
+              <h3>Landing Pages & Sites</h3>
+              <p>Página profissional para apresentar seu negócio, divulgar seus serviços e facilitar o contato pelo WhatsApp.</p>
+              <div class="service-price">
+                <strong>A partir de R$ 890</strong>
+                <small>O valor pode variar conforme a estrutura e necessidades do projeto.</small>
+              </div>
+            </div>
+
+            <div class="service-card" data-card="2">
+              <div class="service-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <div class="service-number">02</div>
+              <h3>Identidade Visual</h3>
+              <p>Uma identidade visual essencial para deixar sua marca mais profissional, consistente e fácil de reconhecer.</p>
+              <div class="service-price">
+                <strong>A partir de R$ 690</strong>
+                <small>O valor pode variar conforme o projeto.</small>
+              </div>
+            </div>
+
+            <div class="service-card" data-card="3">
+              <div class="service-icon">
+                <i class="fas fa-image"></i>
+              </div>
+              <div class="service-number">03</div>
+              <h3>Design para Redes Sociais</h3>
+              <p>Artes e templates profissionais para deixar sua comunicação nas redes mais organizada, consistente e alinhada à sua marca.</p>
+              <div class="service-price">
+                <strong>Pacotes a partir de R$ 290</strong>
+                <small>O valor depende da quantidade de peças.</small>
+              </div>
+            </div>
+
+            <div class="service-card" data-card="4">
+              <div class="service-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="service-number">04</div>
+              <h3>Google Ads & Meta Ads</h3>
+              <p>Configuração e gestão de campanhas para pequenos negócios que querem divulgar seus serviços e alcançar um público mais específico.</p>
+              <div class="service-price">
+                <strong>Gestão a partir de R$ 450/mês</strong>
+                <small>A verba destinada às plataformas de anúncios é paga separadamente pelo cliente.</small>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-desktop"></i>
-            </div>
-            <div class="service-number">01</div>
-            <h3>Landing Pages & Sites</h3>
-            <p>Página profissional para apresentar seu negócio, divulgar seus serviços e facilitar o contato pelo WhatsApp.</p>
-            <div class="service-features">
-              <small>Estrutura responsiva • Integração WhatsApp • Formulário de contato • Métricas básicas</small>
-            </div>
-            <div class="service-price">
-              <strong>A partir de R$ 890</strong>
-              <small>O valor pode variar conforme a estrutura e necessidades do projeto.</small>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-palette"></i>
-            </div>
-            <div class="service-number">02</div>
-            <h3>Identidade Visual</h3>
-            <p>Uma identidade visual essencial para deixar sua marca mais profissional, consistente e fácil de reconhecer.</p>
-            <div class="service-features">
-              <small>Logo • Paleta de cores • Tipografia • Elementos básicos • Materiais essenciais</small>
-            </div>
-            <div class="service-price">
-              <strong>A partir de R$ 690</strong>
-              <small>O valor pode variar conforme o projeto.</small>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-image"></i>
-            </div>
-            <div class="service-number">03</div>
-            <h3>Design para Redes Sociais</h3>
-            <p>Artes e templates profissionais para deixar sua comunicação nas redes mais organizada, consistente e alinhada à sua marca.</p>
-            <div class="service-features">
-              <small>Oferecemos design. Não inclui: postagem diária, gestão de comunidade ou criação de legendas.</small>
-            </div>
-            <div class="service-price">
-              <strong>Pacotes a partir de R$ 290</strong>
-              <small>O valor depende da quantidade de peças.</small>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="service-number">04</div>
-            <h3>Google Ads & Meta Ads</h3>
-            <p>Configuração e gestão de campanhas para pequenos negócios que querem divulgar seus serviços e alcançar um público mais específico.</p>
-            <div class="service-features">
-              <small>Investimento em anúncios não incluso. Resultados dependem de vários fatores.</small>
-            </div>
-            <div class="service-price">
-              <strong>Gestão a partir de R$ 450/mês</strong>
-              <small>A verba destinada às plataformas de anúncios é paga separadamente pelo cliente.</small>
-            </div>
-          </div>
-
-        </div>
-
-
       </div>
     </section>
 
     <!-- PORTFÓLIO -->
-    <section class="portfolio" id="portfolio">
-      <div class="portfolio-container">
-        <div class="section-header">
+    <section class="portfolio" id="portfolio" style="height: 500vh;">
+      <div class="portfolio-wrapper">
+
+        <!-- TOPO: título centralizado -->
+        <div class="portfolio-text">
           <h2>Projetos que colocam marcas em movimento.</h2>
           <p>Alguns exemplos de como design e estratégia transformam negócios.</p>
         </div>
 
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
+        <!-- CARROSSEL: card central + laterais visíveis -->
+        <div class="portfolio-cards-container">
+
+          <div class="portfolio-card active" data-pcard="0">
             <div class="portfolio-image" style="background-image: url('img/LandingPage.png'); background-size: cover; background-position: center;"></div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Landing Page</span>
@@ -1517,7 +1855,7 @@
             </div>
           </div>
 
-          <div class="portfolio-card">
+          <div class="portfolio-card side-next" data-pcard="1">
             <div class="portfolio-image" style="background-image: url('img/IdentidadeVisual.png'); background-size: cover; background-position: center;"></div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Identidade Visual</span>
@@ -1526,7 +1864,7 @@
             </div>
           </div>
 
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-pcard="2">
             <div class="portfolio-image" style="background-image: url('img/SocialMedia.png'); background-size: cover; background-position: center;"></div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Social Media</span>
@@ -1535,7 +1873,7 @@
             </div>
           </div>
 
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-pcard="3">
             <div class="portfolio-image" style="background-image: url('img/Marketing.png'); background-size: cover; background-position: center;"></div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Tráfego Pago</span>
@@ -1543,7 +1881,22 @@
               <p>Campanha de tráfego pago estruturada para divulgar uma oferta ou serviço específico.</p>
             </div>
           </div>
+
         </div>
+
+        <!-- RODAPÉ: dots + contador -->
+        <div class="portfolio-footer">
+          <div class="portfolio-dots" id="portfolio-dots">
+            <span class="portfolio-dot active"></span>
+            <span class="portfolio-dot"></span>
+            <span class="portfolio-dot"></span>
+            <span class="portfolio-dot"></span>
+          </div>
+          <div class="portfolio-counter">
+            <span class="current" id="portfolio-current">01</span> / 04
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1623,8 +1976,8 @@
     <!-- CTA FINAL -->
     <section class="final-cta">
       <div class="final-cta-container">
-        <h2>Negócios pequenos merecem soluções de qualidade.</h2>
-        <p>Vamos encontrar uma solução que faça sentido para o seu negócio hoje.</p>
+        <h2>Negócios pequenos merecem<br><span class="highlight">soluções de qualidade.</span></h2>
+        <p>Vamos encontrar uma solução que faça sentido<br>para o seu negócio hoje.</p>
       </div>
     </section>
 
@@ -1637,32 +1990,32 @@
         <form id="contact-form" class="contact-form">
           <div class="form-group">
             <label for="name">Seu nome</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              required 
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
               placeholder="Como posso te chamar?"
             >
           </div>
 
           <div class="form-group">
             <label for="email">E-mail</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              required 
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
               placeholder="seu@email.com"
             >
           </div>
 
           <div class="form-group">
             <label for="phone">Telefone</label>
-            <input 
-              type="tel" 
-              id="phone" 
-              name="phone" 
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
               placeholder="(11) 99999-9999"
               inputmode="numeric"
               pattern="[0-9\s\(\)\-]+"
@@ -1684,10 +2037,10 @@
 
           <div class="form-group">
             <label for="message">Conte um pouco sobre seu negócio</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              required 
+            <textarea
+              id="message"
+              name="message"
+              required
               placeholder="Escreva aqui..."
             ></textarea>
           </div>
@@ -1736,7 +2089,7 @@
     // HAMBURGER MENU
     const hamburger = document.getElementById('hamburger');
     const navMobile = document.getElementById('nav-mobile');
-    
+
     if (hamburger) {
       hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
@@ -1767,13 +2120,13 @@
     if (phoneInput) {
       phoneInput.addEventListener('input', function(e) {
         let numbers = this.value.replace(/\D/g, '');
-        
+
         if (numbers.length > 11) {
           numbers = numbers.slice(0, 11);
         }
-        
+
         let formatted = '';
-        
+
         if (numbers.length === 0) {
           formatted = '';
         } else if (numbers.length <= 2) {
@@ -1785,7 +2138,7 @@
         } else {
           formatted = `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
         }
-        
+
         this.value = formatted;
       });
 
@@ -1828,17 +2181,187 @@
       });
     }
 
-    /* ===== CARROSSEL PARA QUEM ===== */
-    const carouselWho = document.getElementById('carouselWho');
-    if (carouselWho) {
-      // O carrossel usa CSS animation, então aqui só precisa estar
-      // A animação scrollWho já está no CSS
-    }
-
     function closeConfirm() {
       document.getElementById('modal-confirm').classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    // ===== ANIMAÇÕES DE ENTRADA POR SEÇÃO =====
+    (function() {
+      // Elementos que vão animar ao entrar na viewport
+      const animatables = document.querySelectorAll(
+        '.section-header, .section-header-small, ' +
+        '.for-who-card, .who-tag, ' +
+        '.timeline-step, ' +
+        '.differential, .positioning-statement, ' +
+        '.final-cta h2, .final-cta p, ' +
+        '.contact-title, .contact-subtitle, .form-group, ' +
+        '.services-text h2, .services-text > p'
+      );
+
+      animatables.forEach(function(el, i) {
+        var isFinalH2 = el.matches('.final-cta h2');
+        var isFinalP  = el.matches('.final-cta p');
+
+        if (isFinalH2) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(60px) scale(0.96)';
+          el.style.transition = 'opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)';
+          el.style.transitionDelay = '0s';
+        } else if (isFinalP) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(40px)';
+          el.style.transition = 'opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1)';
+          el.style.transitionDelay = '0.25s';
+        } else {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(32px)';
+          el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+          // Stagger para elementos dentro de grids
+          const parent = el.parentElement;
+          if (parent) {
+            const siblings = parent.querySelectorAll(':scope > *');
+            siblings.forEach(function(sib, idx) {
+              if (sib === el) {
+                el.style.transitionDelay = (idx * 0.1) + 's';
+              }
+            });
+          }
+        }
+      });
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0) scale(1)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      animatables.forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // ===== SCROLL HIJACKING - PORTFÓLIO =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const portfolioSection  = document.querySelector('.portfolio');
+      const portfolioCards    = document.querySelectorAll('.portfolio-card');
+      const portfolioDots     = document.querySelectorAll('.portfolio-dot');
+      const portfolioCurrent  = document.getElementById('portfolio-current');
+
+      if (!portfolioSection || portfolioCards.length === 0) return;
+
+      function updatePortfolio(idx) {
+        portfolioCards.forEach(function(card, i) {
+          card.classList.remove('active', 'side-prev', 'side-next', 'far-prev');
+          var diff = i - idx;
+          if (diff === 0)       card.classList.add('active');
+          else if (diff === -1) card.classList.add('side-prev');
+          else if (diff === 1)  card.classList.add('side-next');
+          else if (diff < -1)   card.classList.add('far-prev');
+          // diff > 1: fica no estado padrão (esperando à direita, opacidade 0)
+        });
+
+        portfolioDots.forEach(function(dot, i) {
+          dot.classList.remove('active', 'past');
+          if (i === idx)    dot.classList.add('active');
+          else if (i < idx) dot.classList.add('past');
+        });
+
+        if (portfolioCurrent) {
+          portfolioCurrent.textContent = String(idx + 1).padStart(2, '0');
+        }
+      }
+
+      // inicializa
+      updatePortfolio(0);
+
+      window.addEventListener('scroll', function() {
+        const secTop  = portfolioSection.offsetTop;
+        const secH    = portfolioSection.offsetHeight;
+        const winH    = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        if (scrollY < secTop || scrollY >= secTop + secH) return;
+
+        const pct = Math.max(0, Math.min(1, (scrollY - secTop) / (secH - winH)));
+        const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
+        updatePortfolio(idx);
+      });
+    });
+
+    // ===== SCROLL HIJACKING - SERVIÇOS =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const servicesSection = document.querySelector('.services');
+      const serviceCards = document.querySelectorAll('.service-card');
+      const navItems = document.querySelectorAll('.services-nav-item');
+
+      if (!servicesSection || serviceCards.length === 0) return;
+
+      // Inicializa primeiro card como ativo
+      serviceCards[0].classList.add('active');
+      if (navItems[0]) navItems[0].classList.add('active');
+
+      window.addEventListener('scroll', function() {
+        const sectionTop = servicesSection.offsetTop;
+        const sectionHeight = servicesSection.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+
+        // Se ainda não chegou na seção, não faz nada
+        if (scrollPosition < sectionTop) {
+          return;
+        }
+
+        // Se passou da seção, remove active de todos
+        if (scrollPosition >= sectionTop + sectionHeight) {
+          serviceCards.forEach(card => card.classList.remove('active', 'prev'));
+          navItems.forEach(item => item.classList.remove('active', 'past'));
+          return;
+        }
+
+        // Calcula quanto de scroll foi feito dentro da seção (0 a 1)
+        const scrollInSection = (scrollPosition - sectionTop) / (sectionHeight - windowHeight);
+        const scrollPercent = Math.max(0, Math.min(1, scrollInSection));
+
+        // Cada card ocupa 25% do scroll
+        const cardIndex = Math.min(
+          Math.floor(scrollPercent * serviceCards.length),
+          serviceCards.length - 1
+        );
+
+        // Atualiza classes dos cards
+        serviceCards.forEach((card, index) => {
+          card.classList.remove('active', 'prev');
+
+          if (index === cardIndex) {
+            card.classList.add('active');
+            card.style.opacity = 1;
+            card.style.transform = 'translateY(0)';
+          } else if (index < cardIndex) {
+            card.classList.add('prev');
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(-100px)';
+          } else {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(100px)';
+          }
+        });
+
+        // Atualiza nav lateral
+        navItems.forEach((item, index) => {
+          item.classList.remove('active', 'past');
+          if (index === cardIndex) {
+            item.classList.add('active');
+          } else if (index < cardIndex) {
+            item.classList.add('past');
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
