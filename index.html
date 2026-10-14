@@ -397,6 +397,13 @@
       filter: drop-shadow(0 0 30px rgba(245, 197, 66, 0.35));
     }
 
+    .hero-torch-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      cursor: crosshair;
+    }
+
     @media (max-width: 1024px) {
       .hero-content {
         grid-template-columns: 1fr;
@@ -1706,6 +1713,7 @@
   <main>
     <!-- HERO -->
     <section class="hero" id="inicio">
+      <canvas id="hero-torch-canvas" class="hero-torch-canvas"></canvas>
       <div class="hero-content">
         <div class="hero-text">
           <h1>Seu negócio pequeno também merece uma presença profissional.</h1>
@@ -2362,6 +2370,125 @@
           }
         });
       });
+    });
+
+    // ===== EFEITO LANTERNA (TORCH) =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('hero-torch-canvas');
+      const hero = document.querySelector('.hero');
+
+      if (!canvas || !hero) return;
+
+      const ctx = canvas.getContext('2d');
+      let mouseX = 0;
+      let mouseY = 0;
+      let isMouseOver = false;
+
+      // Quebra texto em caracteres individuais
+      function wrapCharacters() {
+        const textElements = hero.querySelectorAll('h1, p');
+        textElements.forEach(el => {
+          if (el.dataset.wrapped) return;
+
+          const text = el.textContent;
+          el.innerHTML = '';
+
+          for (let char of text) {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.display = 'inline';
+            el.appendChild(span);
+          }
+
+          el.dataset.wrapped = 'true';
+        });
+      }
+
+      function resizeCanvas() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+      }
+
+      function updateTorch(x, y) {
+        // Limpa o canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Desenha overlay escuro em todo o canvas
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Cria gradiente radial para a lanterna (de opaco a transparente)
+        const radius = 140;
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');      // opaco no centro
+        gradient.addColorStop(0.7, 'rgba(0, 0, 0, 0.3)');  // suaviza
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');      // transparente nas bordas
+
+        // Remove a escuridão onde a lanterna passa
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+
+      hero.addEventListener('mouseenter', function() {
+        isMouseOver = true;
+      });
+
+      hero.addEventListener('mouseleave', function() {
+        isMouseOver = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Desenha overlay escuro ao sair
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Remove efeito de cor das letras
+        const charElements = hero.querySelectorAll('h1 span, p span');
+        charElements.forEach(span => {
+          span.style.color = '';
+        });
+      });
+
+      hero.addEventListener('mousemove', function(e) {
+        if (!isMouseOver) return;
+
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+
+        updateTorch(mouseX, mouseY);
+
+        // Efeito de cor em cada letra individualmente
+        const charElements = hero.querySelectorAll('h1 span, p span');
+        const torchRadius = 140;
+
+        charElements.forEach(span => {
+          const spanRect = span.getBoundingClientRect();
+          const spanCenterX = spanRect.left - rect.left + spanRect.width / 2;
+          const spanCenterY = spanRect.top - rect.top + spanRect.height / 2;
+
+          const distance = Math.sqrt(
+            Math.pow(mouseX - spanCenterX, 2) + Math.pow(mouseY - spanCenterY, 2)
+          );
+
+          if (distance < torchRadius + 50) {
+            const intensity = Math.max(0, 1 - distance / (torchRadius + 50));
+            span.style.color = `rgba(245, 197, 66, ${0.3 + intensity * 0.7})`;
+          } else {
+            span.style.color = '';
+          }
+        });
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      wrapCharacters();
+      resizeCanvas();
+      // Desenha overlay inicial
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     });
   </script>
 </body>
