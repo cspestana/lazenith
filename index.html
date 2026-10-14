@@ -1185,10 +1185,60 @@
       font-size: 3rem;
       position: relative;
       overflow: hidden;
+      cursor: none;
     }
 
     .portfolio-image::before {
-      content: none;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 2;
+    }
+
+    /* Spotlight effect styles */
+    .portfolio-image .spotlight-reveal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .portfolio-image .spotlight-reveal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    svg.spotlight-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .spotlight-cursor {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 2px solid rgba(245, 197, 66, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 4;
+      display: none;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 0 20px rgba(245, 197, 66, 0.3), 0 0 12px rgba(245, 197, 66, 0.2);
+    }
+
+    .portfolio-image:hover .spotlight-cursor {
+      display: block;
     }
 
     .portfolio-content {
@@ -2133,7 +2183,23 @@
         <div class="portfolio-cards-container">
 
           <div class="portfolio-card active" data-pcard="0">
-            <div class="portfolio-image" style="background-image: url('img/LandingPage.png'); background-size: cover; background-position: center;"></div>
+            <div class="portfolio-image">
+              <div class="spotlight-reveal"><img src="img/LandingPage.png" alt="Landing Page"></div>
+              <svg class="spotlight-mask" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="spotlight-0" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                  </radialGradient>
+                  <mask id="mask-0">
+                    <circle class="light-circle" cx="50" cy="50" r="25" fill="url(#spotlight-0)"/>
+                  </mask>
+                </defs>
+                <rect width="100" height="100" fill="white" mask="url(#mask-0)" opacity="0"/>
+              </svg>
+              <div class="spotlight-cursor"></div>
+            </div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Landing Page</span>
               <h3>Personal Trainer</h3>
@@ -2142,7 +2208,23 @@
           </div>
 
           <div class="portfolio-card side-next" data-pcard="1">
-            <div class="portfolio-image" style="background-image: url('img/IdentidadeVisual.png'); background-size: cover; background-position: center;"></div>
+            <div class="portfolio-image">
+              <div class="spotlight-reveal"><img src="img/IdentidadeVisual.png" alt="Identidade Visual"></div>
+              <svg class="spotlight-mask" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="spotlight-1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                  </radialGradient>
+                  <mask id="mask-1">
+                    <circle class="light-circle" cx="50" cy="50" r="25" fill="url(#spotlight-1)"/>
+                  </mask>
+                </defs>
+                <rect width="100" height="100" fill="white" mask="url(#mask-1)" opacity="0"/>
+              </svg>
+              <div class="spotlight-cursor"></div>
+            </div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Identidade Visual</span>
               <h3>Pequeno Negócio</h3>
@@ -2151,7 +2233,23 @@
           </div>
 
           <div class="portfolio-card" data-pcard="2">
-            <div class="portfolio-image" style="background-image: url('img/SocialMedia.png'); background-size: cover; background-position: center;"></div>
+            <div class="portfolio-image">
+              <div class="spotlight-reveal"><img src="img/SocialMedia.png" alt="Social Media"></div>
+              <svg class="spotlight-mask" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="spotlight-2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                  </radialGradient>
+                  <mask id="mask-2">
+                    <circle class="light-circle" cx="50" cy="50" r="25" fill="url(#spotlight-2)"/>
+                  </mask>
+                </defs>
+                <rect width="100" height="100" fill="white" mask="url(#mask-2)" opacity="0"/>
+              </svg>
+              <div class="spotlight-cursor"></div>
+            </div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Social Media</span>
               <h3>Profissional Liberal</h3>
@@ -2160,7 +2258,23 @@
           </div>
 
           <div class="portfolio-card" data-pcard="3">
-            <div class="portfolio-image" style="background-image: url('img/Marketing.png'); background-size: cover; background-position: center;"></div>
+            <div class="portfolio-image">
+              <div class="spotlight-reveal"><img src="img/Marketing.png" alt="Tráfego Pago"></div>
+              <svg class="spotlight-mask" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="spotlight-3" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                  </radialGradient>
+                  <mask id="mask-3">
+                    <circle class="light-circle" cx="50" cy="50" r="25" fill="url(#spotlight-3)"/>
+                  </mask>
+                </defs>
+                <rect width="100" height="100" fill="white" mask="url(#mask-3)" opacity="0"/>
+              </svg>
+              <div class="spotlight-cursor"></div>
+            </div>
             <div class="portfolio-content">
               <span class="portfolio-tag">Tráfego Pago</span>
               <h3>Pequena Empresa</h3>
@@ -2871,6 +2985,40 @@
       // Desenha overlay inicial
       ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+
+    // ===== SPOTLIGHT EFFECT PARA PORTFOLIO =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const portfolioImages = document.querySelectorAll('.portfolio-image');
+
+      portfolioImages.forEach((image, idx) => {
+        const lightCircle = image.querySelector('.light-circle');
+        const cursor = image.querySelector('.spotlight-cursor');
+
+        if (!lightCircle) return;
+
+        image.addEventListener('mousemove', (e) => {
+          const rect = image.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Coordenadas normalizadas para SVG (0-100)
+          const svgX = (x / rect.width) * 100;
+          const svgY = (y / rect.height) * 100;
+
+          // Atualiza posição do circle no SVG
+          lightCircle.setAttribute('cx', svgX);
+          lightCircle.setAttribute('cy', svgY);
+
+          // Atualiza posição do cursor visual
+          cursor.style.left = x + 'px';
+          cursor.style.top = y + 'px';
+        });
+
+        image.addEventListener('mouseleave', () => {
+          cursor.style.display = 'none';
+        });
+      });
     });
   </script>
 </body>
