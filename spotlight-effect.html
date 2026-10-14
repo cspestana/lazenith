@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotlight Effect — LaZenith</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1a1a1a;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .description {
+      color: #aaa;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 14px;
+    }
+
+    /* Container do spotlight */
+    .spotlight-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: none;
+    }
+
+    .spotlight-image {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    /* Imagem com filtro escuro (base) */
+    .spotlight-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Layer escuro que fica por cima */
+    .spotlight-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* SVG Mask para o spotlight */
+    svg.spotlight-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Imagem sem filtro que aparece no spotlight */
+    .spotlight-reveal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .spotlight-reveal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Cursor customizado */
+    .spotlight-cursor {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 2px solid rgba(245, 197, 66, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 4;
+      display: none;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 0 30px rgba(245, 197, 66, 0.3), 0 0 20px rgba(245, 197, 66, 0.2);
+      transition: all 0.05s ease-out;
+    }
+
+    .spotlight-container:hover .spotlight-cursor {
+      display: block;
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(245, 197, 66, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box strong {
+      color: #f5c542;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ Spotlight Effect — LaZenith</h1>
+    <p class="description">Passe o mouse sobre a imagem para revelar as cores reais</p>
+
+    <div class="spotlight-container" id="spotlightContainer">
+      <div class="spotlight-image">
+        <!-- Imagem com filtro escuro (visível por padrão) -->
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Escritório moderno">
+
+        <!-- Imagem sem filtro (revelada pelo spotlight) -->
+        <div class="spotlight-reveal">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Escritório moderno revelado">
+        </div>
+
+        <!-- SVG Mask para criar o efeito de luz -->
+        <svg class="spotlight-mask" id="spotlightMask" viewBox="0 0 600 400" preserveAspectRatio="none">
+          <defs>
+            <radialGradient id="spotlightGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+              <stop offset="70%" style="stop-color:white;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+            </radialGradient>
+            <mask id="spotlight" x="0" y="0" width="100%" height="100%">
+              <circle id="light-circle" cx="300" cy="200" r="60" fill="url(#spotlightGradient)"/>
+            </mask>
+          </defs>
+          <!-- Retângulo que usa a mask para revelar a imagem -->
+          <rect width="600" height="400" fill="white" mask="url(#spotlight)" opacity="0"/>
+        </svg>
+
+        <!-- Cursor visual -->
+        <div class="spotlight-cursor" id="spotlightCursor"></div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>💡 Como funciona:</strong><br>
+      • O filtro escuro cobre a imagem por padrão<br>
+      • Ao passar o mouse, um "spotlight" circular revela as cores reais<br>
+      • O efeito cria profundidade e engajamento visual<br>
+      • Perfeito para portfolio, cases de clientes ou hero sections
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('spotlightContainer');
+    const lightCircle = document.getElementById('light-circle');
+    const spotlightMask = document.getElementById('spotlightMask');
+    const cursor = document.getElementById('spotlightCursor');
+    const revealImage = document.querySelector('.spotlight-reveal');
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Pega as coordenadas do SVG (0-600 x 0-400)
+      const svgX = (x / rect.width) * 600;
+      const svgY = (y / rect.height) * 400;
+
+      // Atualiza a posição do circle no SVG
+      lightCircle.setAttribute('cx', svgX);
+      lightCircle.setAttribute('cy', svgY);
+
+      // Atualiza a posição do cursor visual
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+    });
+
+    container.addEventListener('mouseleave', () => {
+      cursor.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
