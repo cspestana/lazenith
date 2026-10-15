@@ -1076,7 +1076,7 @@
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(245, 197, 66, 0.08);
-      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
       /* padrão: esperando à direita, invisível */
       opacity: 0;
@@ -2170,7 +2170,7 @@
     </section>
 
     <!-- PORTFÓLIO -->
-    <section class="portfolio" id="portfolio" style="height: 500vh;">
+    <section class="portfolio" id="portfolio">
       <div class="portfolio-wrapper">
 
         <!-- TOPO: título centralizado -->
@@ -2758,6 +2758,12 @@
 
       if (!portfolioSection || portfolioCards.length === 0) return;
 
+      // ===== AUTOPLAY SUAVE DO PORTFOLIO =====
+      let currentPortfolioIdx = 0;
+      let isPortfolioAutoplayRunning = false;
+      let portfolioAutoplayInterval = null;
+      let isUserScrolling = false;
+
       function updatePortfolio(idx) {
         var TOTAL = portfolioCards.length;
         portfolioCards.forEach(function(card, i) {
@@ -2781,21 +2787,38 @@
         }
       }
 
+      function startPortfolioAutoplay() {
+        if (isPortfolioAutoplayRunning) return;
+        isPortfolioAutoplayRunning = true;
+
+        portfolioAutoplayInterval = setInterval(() => {
+          currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
+          updatePortfolio(currentPortfolioIdx);
+        }, 2000); // Muda de card a cada 2 segundos (looping suave)
+      }
+
+      function pausePortfolioAutoplay() {
+        isPortfolioAutoplayRunning = false;
+        if (portfolioAutoplayInterval) {
+          clearInterval(portfolioAutoplayInterval);
+        }
+      }
+
       // inicializa
       updatePortfolio(0);
 
-      window.addEventListener('scroll', function() {
-        const secTop  = portfolioSection.offsetTop;
-        const secH    = portfolioSection.offsetHeight;
-        const winH    = window.innerHeight;
-        const scrollY = window.scrollY;
+      // Listener para mouse no portfolio container
+      const portfolioContainer = document.querySelector('.portfolio-cards-container');
+      if (portfolioContainer) {
+        // Pausa autoplay ao passar mouse
+        portfolioContainer.addEventListener('mouseenter', pausePortfolioAutoplay);
 
-        if (scrollY < secTop || scrollY >= secTop + secH) return;
+        // Continua autoplay ao sair do mouse
+        portfolioContainer.addEventListener('mouseleave', startPortfolioAutoplay);
+      }
 
-        const pct = Math.max(0, Math.min(1, (scrollY - secTop) / (secH - winH)));
-        const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
-        updatePortfolio(idx);
-      });
+      // Inicia o autoplay
+      startPortfolioAutoplay();
     });
 
     // ===== SCROLL HIJACKING - SERVIÇOS =====
