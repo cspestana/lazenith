@@ -2758,6 +2758,12 @@
 
       if (!portfolioSection || portfolioCards.length === 0) return;
 
+      // ===== AUTOPLAY SUAVE DO PORTFOLIO =====
+      let currentPortfolioIdx = 0;
+      let isPortfolioAutoplayRunning = false;
+      let portfolioAutoplayInterval = null;
+      let isUserScrolling = false;
+
       function updatePortfolio(idx) {
         var TOTAL = portfolioCards.length;
         portfolioCards.forEach(function(card, i) {
@@ -2781,35 +2787,16 @@
         }
       }
 
-      // inicializa
-      updatePortfolio(0);
-
-      window.addEventListener('scroll', function() {
-        const secTop  = portfolioSection.offsetTop;
-        const secH    = portfolioSection.offsetHeight;
-        const winH    = window.innerHeight;
-        const scrollY = window.scrollY;
-
-        if (scrollY < secTop || scrollY >= secTop + secH) return;
-
-        const pct = Math.max(0, Math.min(1, (scrollY - secTop) / (secH - winH)));
-        const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
-        updatePortfolio(idx);
-      });
-
-      // ===== AUTOPLAY SUAVE DO PORTFOLIO =====
-      let currentPortfolioIdx = 0;
-      let isPortfolioAutoplayRunning = false;
-      let portfolioAutoplayInterval = null;
-
       function startPortfolioAutoplay() {
         if (isPortfolioAutoplayRunning) return;
         isPortfolioAutoplayRunning = true;
 
         portfolioAutoplayInterval = setInterval(() => {
-          currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
-          updatePortfolio(currentPortfolioIdx);
-        }, 4000); // Muda de card a cada 4 segundos
+          if (!isUserScrolling) {
+            currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
+            updatePortfolio(currentPortfolioIdx);
+          }
+        }, 4000);
       }
 
       function pausePortfolioAutoplay() {
@@ -2819,13 +2806,46 @@
         }
       }
 
+      // inicializa
+      updatePortfolio(0);
+
+      let scrollTimeout = null;
+      window.addEventListener('scroll', function() {
+        const secTop  = portfolioSection.offsetTop;
+        const secH    = portfolioSection.offsetHeight;
+        const winH    = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        // Se está na seção do portfolio, o scroll hijacking controla
+        if (scrollY >= secTop && scrollY < secTop + secH) {
+          isUserScrolling = true;
+          pausePortfolioAutoplay();
+
+          const pct = Math.max(0, Math.min(1, (scrollY - secTop) / (secH - winH)));
+          const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
+          updatePortfolio(idx);
+          currentPortfolioIdx = idx;
+
+          // Aguarda scroll terminar para retomar autoplay
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+            startPortfolioAutoplay();
+          }, 500);
+        }
+      });
+
       const portfolioContainer = document.querySelector('.portfolio-cards-container');
       if (portfolioContainer) {
         // Pausa autoplay ao passar mouse
         portfolioContainer.addEventListener('mouseenter', pausePortfolioAutoplay);
 
         // Continua autoplay ao sair do mouse
-        portfolioContainer.addEventListener('mouseleave', startPortfolioAutoplay);
+        portfolioContainer.addEventListener('mouseleave', function() {
+          if (!isUserScrolling) {
+            startPortfolioAutoplay();
+          }
+        });
       }
 
       // Inicia o autoplay
