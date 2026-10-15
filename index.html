@@ -1003,6 +1003,28 @@
         position: static;
         height: auto;
         width: 100%;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        gap: 1rem;
+        padding: 0 1rem;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .services-cards-container::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .services-cards-container::-webkit-scrollbar-track {
+        background: rgba(245, 197, 66, 0.1);
+        border-radius: 10px;
+      }
+
+      .services-cards-container::-webkit-scrollbar-thumb {
+        background: rgba(245, 197, 66, 0.4);
+        border-radius: 10px;
       }
 
       .service-card {
@@ -1010,12 +1032,16 @@
         opacity: 1 !important;
         transform: translateY(0) !important;
         pointer-events: auto !important;
-        width: 100%;
-        max-width: 100%;
-        padding: 2rem;
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        flex-shrink: 0;
+        padding: 1.5rem;
         min-height: auto;
-        margin: 0 0 1.5rem 0;
-        display: block;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        scroll-snap-align: start;
       }
 
       .service-card.active {
@@ -1026,17 +1052,46 @@
       .service-card.prev {
         opacity: 1 !important;
         transform: translateY(0) !important;
-        display: block;
+        display: flex;
       }
 
       .service-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
       }
 
       .service-card h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+      }
+
+      .service-number {
+        font-size: 0.8rem;
+      }
+
+      .service-card p {
+        font-size: 0.9rem;
+      }
+
+      .service-features {
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .service-features small {
+        font-size: 0.85rem;
+      }
+
+      .service-price {
+        padding-top: 1rem;
+      }
+
+      .service-price strong {
+        font-size: 1.1rem;
+      }
+
+      .service-price small {
+        font-size: 0.8rem;
       }
     }
 
@@ -1346,13 +1401,14 @@
         height: auto;
         position: relative;
         top: auto;
-        padding: 2.5rem 1rem 1.5rem;
+        padding: 2.5rem 0 1.5rem;
         overflow: visible;
         background: transparent;
       }
 
       .portfolio-text {
         margin-bottom: 2rem;
+        padding: 0 1rem;
       }
 
       .portfolio-text h2 {
@@ -1368,24 +1424,49 @@
         position: static;
         height: auto;
         margin-bottom: 0;
-        display: block;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        gap: 1rem;
+        padding: 0 1rem;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar-track {
+        background: rgba(245, 197, 66, 0.1);
+        border-radius: 10px;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar-thumb {
+        background: rgba(245, 197, 66, 0.4);
+        border-radius: 10px;
       }
 
       .portfolio-card {
         position: static !important;
-        width: 100%;
-        max-width: 100%;
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        flex-shrink: 0;
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
         pointer-events: auto;
-        margin: 0 0 1.5rem 0;
-        display: block;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
         background: #2A2A3E;
         border-radius: 16px;
         overflow: hidden;
         border: 1px solid rgba(245, 197, 66, 0.08);
         z-index: auto !important;
+        scroll-snap-align: start;
       }
 
       .portfolio-card.active,
@@ -1395,32 +1476,39 @@
         transform: none !important;
         filter: none !important;
         pointer-events: auto;
-        margin: 0 0 1.5rem 0;
+        width: 280px;
+        min-width: 280px;
       }
 
       .portfolio-image {
         width: 100%;
-        height: 200px;
+        height: 180px;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
       }
 
       .portfolio-content {
-        padding: 1.2rem;
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .portfolio-tag {
         font-size: 0.7rem;
         padding: 0.25rem 0.7rem;
+        margin-bottom: 0.5rem;
       }
 
       .portfolio-card h3 {
-        font-size: 1rem;
+        font-size: 0.95rem;
         margin-bottom: 0.3rem;
       }
 
       .portfolio-card p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        flex-grow: 1;
       }
     }
 
@@ -1742,17 +1830,52 @@
 
     @media (max-width: 768px) {
       .testimonials {
-        padding: 4rem 2rem;
+        padding: 4rem 0;
+      }
+
+      .testimonials-container {
+        padding: 0;
       }
 
       .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        gap: 1rem;
+        margin: 3rem 1rem;
+        padding: 0;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .testimonials-grid::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .testimonials-grid::-webkit-scrollbar-track {
+        background: rgba(245, 197, 66, 0.1);
+        border-radius: 10px;
+      }
+
+      .testimonials-grid::-webkit-scrollbar-thumb {
+        background: rgba(245, 197, 66, 0.4);
+        border-radius: 10px;
+      }
+
+      .testimonial-card {
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        flex-shrink: 0;
+        padding: 1.5rem;
+        scroll-snap-align: start;
       }
 
       .testimonials-stats {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        margin: 2rem 1rem;
       }
 
       .stat strong {
