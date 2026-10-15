@@ -1076,7 +1076,7 @@
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(245, 197, 66, 0.08);
-      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
       /* padrão: esperando à direita, invisível */
       opacity: 0;
@@ -2796,7 +2796,7 @@
             currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
             updatePortfolio(currentPortfolioIdx);
           }
-        }, 4000);
+        }, 2500); // Muda de card a cada 2.5 segundos (looping mais rápido)
       }
 
       function pausePortfolioAutoplay() {
