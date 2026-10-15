@@ -973,7 +973,8 @@
 
     @media (max-width: 768px) {
       .services {
-        height: 600vh;
+        height: auto;
+        padding: 3rem 0;
       }
 
       .services-layout {
@@ -999,12 +1000,16 @@
 
       .services-cards-container {
         max-width: 100%;
+        position: relative;
+        height: 420px;
       }
 
       .service-card {
-        width: 100%;
+        width: 90%;
+        max-width: 100%;
         padding: 2rem;
         min-height: 380px;
+        margin: 0 auto;
       }
 
       .service-icon {
@@ -1241,6 +1246,25 @@
       display: block;
     }
 
+    /* Desabilitar spotlight em mobile (sem mouse) */
+    @media (hover: none) and (pointer: coarse) {
+      .spotlight-cursor {
+        display: none !important;
+      }
+
+      svg.spotlight-mask {
+        display: none !important;
+      }
+
+      .spotlight-reveal {
+        display: none !important;
+      }
+
+      .portfolio-image img {
+        display: block !important;
+      }
+    }
+
     .portfolio-content {
       padding: 1.4rem 1.6rem 1.6rem;
     }
@@ -1279,6 +1303,69 @@
       .portfolio-card { width: 280px; }
       .portfolio-card.side-prev { transform: translateX(-220px) scale(0.82); }
       .portfolio-card.side-next { transform: translateX(220px) scale(0.82); }
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-wrapper {
+        height: auto;
+        position: relative;
+        top: auto;
+        padding: 2.5rem 1rem;
+      }
+
+      .portfolio-text h2 {
+        font-size: 1.3rem;
+        white-space: normal;
+      }
+
+      .portfolio-text > p {
+        font-size: 0.9rem;
+      }
+
+      .portfolio-cards-container {
+        height: 400px;
+        margin-bottom: 2rem;
+      }
+
+      .portfolio-card {
+        width: 100%;
+        max-width: 90vw;
+        position: relative !important;
+        opacity: 1 !important;
+        transform: translateX(0) scale(1) !important;
+        filter: none !important;
+        pointer-events: auto;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        flex-direction: column;
+        z-index: 1 !important;
+      }
+
+      .portfolio-card.active,
+      .portfolio-card.side-prev,
+      .portfolio-card.side-next {
+        opacity: 1 !important;
+        transform: translateX(0) scale(1) !important;
+        filter: none !important;
+        pointer-events: auto;
+      }
+
+      .portfolio-image {
+        height: 200px;
+      }
+
+      .portfolio-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+      }
+
+      .portfolio-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .portfolio-card p {
+        font-size: 0.85rem;
+      }
     }
 
     /* ===== COMO FUNCIONA ===== */
