@@ -1015,11 +1015,13 @@
         height: auto;
         width: 100%;
         display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
         gap: 0;
-        padding: 0;
+        padding: 0 0 1rem;
         margin: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
@@ -1055,6 +1057,9 @@
         margin: 0 0.5rem;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        height: auto !important;
+        align-self: stretch;
         scroll-snap-align: start;
       }
 
