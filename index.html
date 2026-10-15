@@ -1076,7 +1076,7 @@
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(245, 197, 66, 0.08);
-      transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
       /* padrão: esperando à direita, invisível */
       opacity: 0;
@@ -2792,11 +2792,9 @@
         isPortfolioAutoplayRunning = true;
 
         portfolioAutoplayInterval = setInterval(() => {
-          if (!isUserScrolling) {
-            currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
-            updatePortfolio(currentPortfolioIdx);
-          }
-        }, 2500); // Muda de card a cada 2.5 segundos (looping mais rápido)
+          currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
+          updatePortfolio(currentPortfolioIdx);
+        }, 1800); // Muda de card a cada 1.8 segundos (looping muito rápido)
       }
 
       function pausePortfolioAutoplay() {
@@ -2809,43 +2807,14 @@
       // inicializa
       updatePortfolio(0);
 
-      let scrollTimeout = null;
-      window.addEventListener('scroll', function() {
-        const secTop  = portfolioSection.offsetTop;
-        const secH    = portfolioSection.offsetHeight;
-        const winH    = window.innerHeight;
-        const scrollY = window.scrollY;
-
-        // Se está na seção do portfolio, o scroll hijacking controla
-        if (scrollY >= secTop && scrollY < secTop + secH) {
-          isUserScrolling = true;
-          pausePortfolioAutoplay();
-
-          const pct = Math.max(0, Math.min(1, (scrollY - secTop) / (secH - winH)));
-          const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
-          updatePortfolio(idx);
-          currentPortfolioIdx = idx;
-
-          // Aguarda scroll terminar para retomar autoplay
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            isUserScrolling = false;
-            startPortfolioAutoplay();
-          }, 500);
-        }
-      });
-
+      // Listener para mouse no portfolio container
       const portfolioContainer = document.querySelector('.portfolio-cards-container');
       if (portfolioContainer) {
         // Pausa autoplay ao passar mouse
         portfolioContainer.addEventListener('mouseenter', pausePortfolioAutoplay);
 
         // Continua autoplay ao sair do mouse
-        portfolioContainer.addEventListener('mouseleave', function() {
-          if (!isUserScrolling) {
-            startPortfolioAutoplay();
-          }
-        });
+        portfolioContainer.addEventListener('mouseleave', startPortfolioAutoplay);
       }
 
       // Inicia o autoplay
