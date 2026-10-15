@@ -1346,13 +1346,14 @@
         height: auto;
         position: relative;
         top: auto;
-        padding: 2.5rem 1rem 1.5rem;
+        padding: 2.5rem 0 1.5rem;
         overflow: visible;
         background: transparent;
       }
 
       .portfolio-text {
         margin-bottom: 2rem;
+        padding: 0 1rem;
       }
 
       .portfolio-text h2 {
@@ -1368,24 +1369,49 @@
         position: static;
         height: auto;
         margin-bottom: 0;
-        display: block;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        gap: 1rem;
+        padding: 0 1rem;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar-track {
+        background: rgba(245, 197, 66, 0.1);
+        border-radius: 10px;
+      }
+
+      .portfolio-cards-container::-webkit-scrollbar-thumb {
+        background: rgba(245, 197, 66, 0.4);
+        border-radius: 10px;
       }
 
       .portfolio-card {
         position: static !important;
-        width: 100%;
-        max-width: 100%;
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        flex-shrink: 0;
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
         pointer-events: auto;
-        margin: 0 0 1.5rem 0;
-        display: block;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
         background: #2A2A3E;
         border-radius: 16px;
         overflow: hidden;
         border: 1px solid rgba(245, 197, 66, 0.08);
         z-index: auto !important;
+        scroll-snap-align: start;
       }
 
       .portfolio-card.active,
@@ -1395,32 +1421,39 @@
         transform: none !important;
         filter: none !important;
         pointer-events: auto;
-        margin: 0 0 1.5rem 0;
+        width: 280px;
+        min-width: 280px;
       }
 
       .portfolio-image {
         width: 100%;
-        height: 200px;
+        height: 180px;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
       }
 
       .portfolio-content {
-        padding: 1.2rem;
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .portfolio-tag {
         font-size: 0.7rem;
         padding: 0.25rem 0.7rem;
+        margin-bottom: 0.5rem;
       }
 
       .portfolio-card h3 {
-        font-size: 1rem;
+        font-size: 0.95rem;
         margin-bottom: 0.3rem;
       }
 
       .portfolio-card p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        flex-grow: 1;
       }
     }
 
