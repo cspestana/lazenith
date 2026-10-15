@@ -3121,31 +3121,18 @@
       // inicializa
       updatePortfolio(0);
 
-      // Listener para mouse apenas no card ativo (do meio)
-      const portfolioCards = document.querySelectorAll('.portfolio-card');
-      function updatePortfolioHoverListeners() {
-        portfolioCards.forEach(card => {
-          // Remove listeners antigos
-          card.removeEventListener('mouseenter', pausePortfolioAutoplay);
-          card.removeEventListener('mouseleave', startPortfolioAutoplay);
-
-          // Se é o card ativo, adiciona os listeners
-          if (card.classList.contains('active')) {
-            card.addEventListener('mouseenter', pausePortfolioAutoplay);
-            card.addEventListener('mouseleave', startPortfolioAutoplay);
+      // Pausa o autoplay só quando o mouse está sobre o card ativo (do meio)
+      const portfolioContainerEl = document.querySelector('.portfolio-cards-container');
+      if (portfolioContainerEl) {
+        portfolioContainerEl.addEventListener('mousemove', function(e) {
+          if (e.target.closest('.portfolio-card.active')) {
+            pausePortfolioAutoplay();
+          } else {
+            startPortfolioAutoplay();
           }
         });
+        portfolioContainerEl.addEventListener('mouseleave', startPortfolioAutoplay);
       }
-
-      // Atualiza os listeners toda vez que muda de card
-      const originalUpdatePortfolio = updatePortfolio;
-      updatePortfolio = function(index) {
-        originalUpdatePortfolio(index);
-        updatePortfolioHoverListeners();
-      };
-
-      // Inicia os listeners
-      updatePortfolioHoverListeners();
 
       // Inicia o autoplay
       startPortfolioAutoplay();
