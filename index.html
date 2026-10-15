@@ -973,7 +973,8 @@
 
     @media (max-width: 768px) {
       .services {
-        height: 600vh;
+        height: auto;
+        padding: 3rem 0;
       }
 
       .services-layout {
@@ -999,12 +1000,16 @@
 
       .services-cards-container {
         max-width: 100%;
+        position: relative;
+        height: 420px;
       }
 
       .service-card {
-        width: 100%;
+        width: 90%;
+        max-width: 100%;
         padding: 2rem;
         min-height: 380px;
+        margin: 0 auto;
       }
 
       .service-icon {
@@ -1239,6 +1244,25 @@
 
     .portfolio-image:hover .spotlight-cursor {
       display: block;
+    }
+
+    /* Desabilitar spotlight em mobile (sem mouse) */
+    @media (hover: none) and (pointer: coarse) {
+      .spotlight-cursor {
+        display: none !important;
+      }
+
+      svg.spotlight-mask {
+        display: none !important;
+      }
+
+      .spotlight-reveal {
+        display: none !important;
+      }
+
+      .portfolio-image img {
+        display: block !important;
+      }
     }
 
     .portfolio-content {
