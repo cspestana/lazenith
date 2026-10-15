@@ -1041,9 +1041,18 @@
         padding: 1.5rem;
         min-height: auto;
         margin: 0;
+        margin-right: 0.5rem;
         display: flex;
         flex-direction: column;
         scroll-snap-align: start;
+      }
+
+      .service-card:first-child {
+        margin-left: 1rem;
+      }
+
+      .service-card:last-child {
+        margin-right: 1rem;
       }
 
       .service-card.active {
@@ -1430,9 +1439,10 @@
         overflow-y: hidden;
         scroll-behavior: smooth;
         gap: 1rem;
-        padding: 0 1rem;
+        padding: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
+        scroll-padding-left: 1rem;
       }
 
       .portfolio-cards-container::-webkit-scrollbar {
@@ -1460,6 +1470,7 @@
         filter: none !important;
         pointer-events: auto;
         margin: 0;
+        margin-right: 0.5rem;
         display: flex;
         flex-direction: column;
         background: #2A2A3E;
@@ -1468,6 +1479,14 @@
         border: 1px solid rgba(245, 197, 66, 0.08);
         z-index: auto !important;
         scroll-snap-align: start;
+      }
+
+      .portfolio-card:first-child {
+        margin-left: 1rem;
+      }
+
+      .portfolio-card:last-child {
+        margin-right: 1rem;
       }
 
       .portfolio-card.active,
@@ -1844,10 +1863,11 @@
         overflow-y: hidden;
         scroll-behavior: smooth;
         gap: 1rem;
-        margin: 3rem 1rem;
+        margin: 3rem 0;
         padding: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
+        scroll-padding-left: 1rem;
       }
 
       .testimonials-grid::-webkit-scrollbar {
@@ -1871,6 +1891,16 @@
         flex-shrink: 0;
         padding: 1.5rem;
         scroll-snap-align: start;
+        margin: 0;
+        margin-right: 0.5rem;
+      }
+
+      .testimonial-card:first-child {
+        margin-left: 1rem;
+      }
+
+      .testimonial-card:last-child {
+        margin-right: 1rem;
       }
 
       .testimonials-stats {
