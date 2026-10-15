@@ -1007,12 +1007,12 @@
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
-        gap: 1rem;
+        gap: 0;
         padding: 0;
         margin: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        scroll-padding-left: 1rem;
+        scroll-padding: 0 1rem;
       }
 
       .services-cards-container::-webkit-scrollbar {
@@ -1040,8 +1040,7 @@
         flex-shrink: 0;
         padding: 1.5rem;
         min-height: auto;
-        margin: 0;
-        margin-right: 0.5rem;
+        margin: 0 0.5rem;
         display: flex;
         flex-direction: column;
         scroll-snap-align: start;
@@ -1344,7 +1343,8 @@
       }
 
       .spotlight-reveal {
-        display: none !important;
+        display: block !important;
+        position: static !important;
       }
 
       .portfolio-image img {
@@ -3104,15 +3104,31 @@
       // inicializa
       updatePortfolio(0);
 
-      // Listener para mouse no portfolio container
-      const portfolioContainer = document.querySelector('.portfolio-cards-container');
-      if (portfolioContainer) {
-        // Pausa autoplay ao passar mouse
-        portfolioContainer.addEventListener('mouseenter', pausePortfolioAutoplay);
+      // Listener para mouse apenas no card ativo (do meio)
+      const portfolioCards = document.querySelectorAll('.portfolio-card');
+      function updatePortfolioHoverListeners() {
+        portfolioCards.forEach(card => {
+          // Remove listeners antigos
+          card.removeEventListener('mouseenter', pausePortfolioAutoplay);
+          card.removeEventListener('mouseleave', startPortfolioAutoplay);
 
-        // Continua autoplay ao sair do mouse
-        portfolioContainer.addEventListener('mouseleave', startPortfolioAutoplay);
+          // Se é o card ativo, adiciona os listeners
+          if (card.classList.contains('active')) {
+            card.addEventListener('mouseenter', pausePortfolioAutoplay);
+            card.addEventListener('mouseleave', startPortfolioAutoplay);
+          }
+        });
       }
+
+      // Atualiza os listeners toda vez que muda de card
+      const originalUpdatePortfolio = updatePortfolio;
+      updatePortfolio = function(index) {
+        originalUpdatePortfolio(index);
+        updatePortfolioHoverListeners();
+      };
+
+      // Inicia os listeners
+      updatePortfolioHoverListeners();
 
       // Inicia o autoplay
       startPortfolioAutoplay();
