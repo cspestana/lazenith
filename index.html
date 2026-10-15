@@ -2796,6 +2796,40 @@
         const idx = Math.min(Math.floor(pct * portfolioCards.length), portfolioCards.length - 1);
         updatePortfolio(idx);
       });
+
+      // ===== AUTOPLAY SUAVE DO PORTFOLIO =====
+      let currentPortfolioIdx = 0;
+      let isPortfolioAutoplayRunning = false;
+      let portfolioAutoplayInterval = null;
+
+      function startPortfolioAutoplay() {
+        if (isPortfolioAutoplayRunning) return;
+        isPortfolioAutoplayRunning = true;
+
+        portfolioAutoplayInterval = setInterval(() => {
+          currentPortfolioIdx = (currentPortfolioIdx + 1) % portfolioCards.length;
+          updatePortfolio(currentPortfolioIdx);
+        }, 4000); // Muda de card a cada 4 segundos
+      }
+
+      function pausePortfolioAutoplay() {
+        isPortfolioAutoplayRunning = false;
+        if (portfolioAutoplayInterval) {
+          clearInterval(portfolioAutoplayInterval);
+        }
+      }
+
+      const portfolioContainer = document.querySelector('.portfolio-cards-container');
+      if (portfolioContainer) {
+        // Pausa autoplay ao passar mouse
+        portfolioContainer.addEventListener('mouseenter', pausePortfolioAutoplay);
+
+        // Continua autoplay ao sair do mouse
+        portfolioContainer.addEventListener('mouseleave', startPortfolioAutoplay);
+      }
+
+      // Inicia o autoplay
+      startPortfolioAutoplay();
     });
 
     // ===== SCROLL HIJACKING - SERVIÇOS =====
