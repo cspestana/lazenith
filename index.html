@@ -1012,7 +1012,8 @@
         margin: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        scroll-padding: 0 1rem;
+        scroll-padding-left: 1rem;
+        scroll-padding-right: 1rem;
       }
 
       .services-cards-container::-webkit-scrollbar {
@@ -3139,12 +3140,20 @@
       const servicesSection = document.querySelector('.services');
       const serviceCards = document.querySelectorAll('.service-card');
       const navItems = document.querySelectorAll('.services-nav-item');
+      const servicesContainer = document.querySelector('.services-cards-container');
 
       if (!servicesSection || serviceCards.length === 0) return;
 
       // Inicializa primeiro card como ativo
       serviceCards[0].classList.add('active');
       if (navItems[0]) navItems[0].classList.add('active');
+
+      // Scroll para o primeiro card no mobile
+      if (servicesContainer && window.innerWidth <= 768) {
+        setTimeout(() => {
+          servicesContainer.scrollLeft = 0;
+        }, 100);
+      }
 
       window.addEventListener('scroll', function() {
         const sectionTop = servicesSection.offsetTop;
