@@ -1007,12 +1007,12 @@
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
-        gap: 1rem;
+        gap: 0;
         padding: 0;
         margin: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        scroll-padding-left: 1rem;
+        scroll-padding: 0 1rem;
       }
 
       .services-cards-container::-webkit-scrollbar {
@@ -1040,8 +1040,7 @@
         flex-shrink: 0;
         padding: 1.5rem;
         min-height: auto;
-        margin: 0;
-        margin-right: 0.5rem;
+        margin: 0 0.5rem;
         display: flex;
         flex-direction: column;
         scroll-snap-align: start;
@@ -1344,7 +1343,8 @@
       }
 
       .spotlight-reveal {
-        display: none !important;
+        display: block !important;
+        position: static !important;
       }
 
       .portfolio-image img {
