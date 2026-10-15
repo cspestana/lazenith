@@ -977,11 +977,22 @@
         padding: 3rem 0;
       }
 
+      .services-wrapper {
+        position: static;
+        height: auto;
+        overflow: visible;
+      }
+
       .services-layout {
+        height: auto;
         grid-template-columns: 1fr;
         gap: 2rem;
         padding: 3rem 2rem;
         align-items: flex-start;
+      }
+
+      .services-layout > * {
+        min-width: 0;
       }
 
       .services-text {
