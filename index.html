@@ -1305,6 +1305,69 @@
       .portfolio-card.side-next { transform: translateX(220px) scale(0.82); }
     }
 
+    @media (max-width: 768px) {
+      .portfolio-wrapper {
+        height: auto;
+        position: relative;
+        top: auto;
+        padding: 2.5rem 1rem;
+      }
+
+      .portfolio-text h2 {
+        font-size: 1.3rem;
+        white-space: normal;
+      }
+
+      .portfolio-text > p {
+        font-size: 0.9rem;
+      }
+
+      .portfolio-cards-container {
+        height: 400px;
+        margin-bottom: 2rem;
+      }
+
+      .portfolio-card {
+        width: 100%;
+        max-width: 90vw;
+        position: relative !important;
+        opacity: 1 !important;
+        transform: translateX(0) scale(1) !important;
+        filter: none !important;
+        pointer-events: auto;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        flex-direction: column;
+        z-index: 1 !important;
+      }
+
+      .portfolio-card.active,
+      .portfolio-card.side-prev,
+      .portfolio-card.side-next {
+        opacity: 1 !important;
+        transform: translateX(0) scale(1) !important;
+        filter: none !important;
+        pointer-events: auto;
+      }
+
+      .portfolio-image {
+        height: 200px;
+      }
+
+      .portfolio-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+      }
+
+      .portfolio-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .portfolio-card p {
+        font-size: 0.85rem;
+      }
+    }
+
     /* ===== COMO FUNCIONA ===== */
     .how-it-works {
       padding: 6rem 4rem;
